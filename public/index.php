@@ -21,7 +21,7 @@
     
     <div class="w-[17%] h-[93vh]  bg-blue-900 " id="menu">
         <!-- Buttons in the sidebar -->
-        <button class="fa-solid fa-bars text-[1.8vw] text-white p-2 hover:text-[#3b1066] transition ease-in-out delay-10 cursor bg-gradient-to-r from-blue-800 via-cyan-700 to-teal-500 focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 w-full" id="burgerBtn">
+        <button class="fa-solid fa-bars text-[1.8vw] text-white p-2 hover:text-[#3b1066] transition ease-in-out delay-10 cursor bg-gradient-to-r from-blue-800 via-cyan-700 to-teal-500  w-full" id="burgerBtn">
         </button>
         
         <div class="flex flex-col justify-start items-start  "> 
