@@ -1,6 +1,9 @@
 <?php 
     // login for the dashboard from the single admin
 
+    include "connection.php";
+
+    
 ?>
 
 

@@ -1,6 +1,20 @@
 
 <?php 
+    // include "connection.php";
 
+    if(isset($_GET['page']))
+    {
+        $page = $_GET['page'];
+
+        if($page=='setting')
+        {
+           $pageinclude =  "register.php";
+
+        }
+    }
+        if($page=='display'){
+            $pageinclude = "login.php";
+    }
 ?>
 
 
@@ -25,52 +39,61 @@
 
    
     <!-- side bar section -->
-    
-    <div class="w-[17%] h-[93vh]  bg-blue-900 " id="menu">
-        <!-- Buttons in the sidebar -->
-        <button class="fa-solid fa-bars text-[1.8vw] text-white p-2 hover:text-[#3b1066] transition ease-in-out delay-10 cursor bg-gradient-to-r from-blue-800 via-cyan-700 to-teal-500  w-full" id="burgerBtn">
-        </button>
-        
-        <div class="flex flex-col justify-start items-start  "> 
+    <div class="flex">
+        <div class="w-[17%] h-[93vh]  bg-blue-900 " id="menu">
+            <!-- Buttons in the sidebar -->
+            <button class="fa-solid fa-bars text-[1.8vw] text-white p-2 hover:text-[#3b1066] transition ease-in-out delay-10 cursor bg-gradient-to-r from-blue-800 via-cyan-700 to-teal-500  w-full" id="burgerBtn">
+            </button>
+            
+            <div class="flex flex-col justify-start items-start  "> 
+                <div class="m-3">
+                   <a href="https://www.facebook.com"> <button class="fa-solid fa-chart-simple text-[1.8vw] text-white p-3  hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5">
+                   </button></a> <label for="dashboard" class= "label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400" ><a href="#">Dashboard</a></label>
+                </div>
+             
             <div class="m-3">
-               <a href="https://www.facebook.com"> <button class="fa-solid fa-chart-simple text-[1.8vw] text-white p-3  hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5">
-               </button></a> <label for="dashboard" class= "label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400" ><a href="#">Dashboard</a></label>
+                 <a href="#"> <button class="fa-brands fa-telegram text-[1.8vw] text-white p-3  hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5">
+                 </button></a>
+                 <label for="enquiry"  class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="#">Enquiry</a></label>
             </div>
-         
-        <div class="m-3">
-             <a href="#"> <button class="fa-brands fa-telegram text-[1.8vw] text-white p-3  hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5">
-             </button></a>
-             <label for="enquiry"  class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="#">Enquiry</a></label>
+            
+            <div class="m-3 ">
+                  
+                 <a href="#"><button class="fa-solid fa-calendar-days text-[1.8vw] text-white p-3 hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5"></button></a>   
+                 <label for="schedule" class="label text-white text-2xl cursor-pointer pl-4 hover:text-sky-400 "><a href="#">Events</a></label>
+            </div>
+    
+            <div class="m-3 ">
+            <a href="#"><button class="fa-solid fa-palette text-[1.8vw] text-white p-3  hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5">
+            </button></a> <label for="artist" class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="#">Artist</a></label>
+            </div>
+    
+            <div class="m-3 ">
+                <a href="#"><button class="fa-solid fa-table-cells text-[1.8vw] text-white p-3 hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5"></button></a> 
+                <label for="Art" class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400  "><a href="?page=display">Display</a></label>
+            </div>
+             
+            <div class="m-3">
+            <a href="#"><button class="fa-solid fa-gear text-[1.8vw] text-white p-3 hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5"></button></a>
+           
+            
+             <label for="Setting" class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400"><a href="?page=setting">Setting</a></label>
+    
+            </div>
+    
+            </div>
         </div>
-        
-        <div class="m-3 ">
-              
-             <a href="#"><button class="fa-solid fa-calendar-days text-[1.8vw] text-white p-3 hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5"></button></a>   
-             <label for="schedule" class="label text-white text-2xl cursor-pointer pl-4 hover:text-sky-400 "><a href="#">Events</a></label>
-        </div>
+            <!--Right side of the screen -->
 
-        <div class="m-3 ">
-        <a href="#"><button class="fa-solid fa-palette text-[1.8vw] text-white p-3  hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5">
-        </button></a> <label for="artist" class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="#">Artist</a></label>
-        </div>
+        <div class=" border-2 border-red-500 w-full">
+            <!-- including the php file -->
 
-        <div class="m-3 ">
-            <a href="#"><button class="fa-solid fa-table-cells text-[1.8vw] text-white p-3 hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5"></button></a> 
-            <label for="Art" class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400  "><a href="#">Display</a></label>
+            <?php include $pageinclude ?>
         </div>
-         
-        <div class="m-3">
-        <a href="#"><button class="fa-solid fa-gear text-[1.8vw] text-white p-3 hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5"></button></a>
-       
-        
-         <label for="Setting" class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400"><a href="#">Setting</a></label>
-
-        </div>
-
-
-        </div>
-       
     </div>
+   
+
+
    
 
     <script src="dashboard.js"></script>
