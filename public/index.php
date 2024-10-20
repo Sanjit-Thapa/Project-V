@@ -1,20 +1,28 @@
 
 <?php 
     // include "connection.php";
-
+ 
     if(isset($_GET['page']))
     {
         $page = $_GET['page'];
 
         if($page=='setting')
         {
-           $pageinclude =  "register.php";
-
+           $pageinclude =  "setting.php";
+           
+        }
+        elseif($page=='display'){
+            $pageinclude = "login.php";
         }
     }
-        if($page=='display'){
-            $pageinclude = "login.php";
-    }
+   else{
+    // $pageinclude = "";//make this as the dashboard part whenever the user visits they firstly see this part //work to be done
+   }
+    
+
+    
+       
+   
 ?>
 
 
@@ -32,7 +40,7 @@
     <div class="bg-blue-900 flex items-center justify-between">
         <h1 class="text-slate-300 text-[1.8vw] p-1 font-semibold pl-3">Art Gallery</h1>
         <a href="https://www.facebook.com">
-            <img src="Assets/62021a.jpg" alt="admin" class="w-16 h-14 pr-2 rounded-full ">
+            <img src="" alt="admin" class="w-16 h-14 pr-2 rounded-full text-red-200">
         </a>
     </div>
 
@@ -40,7 +48,7 @@
    
     <!-- side bar section -->
     <div class="flex">
-        <div class="w-[17%] h-[93vh]  bg-blue-900 " id="menu">
+        <div class="w-[17%] h-[100vh]  bg-blue-900 " id="menu">
             <!-- Buttons in the sidebar -->
             <button class="fa-solid fa-bars text-[1.8vw] text-white p-2 hover:text-[#3b1066] transition ease-in-out delay-10 cursor bg-gradient-to-r from-blue-800 via-cyan-700 to-teal-500  w-full" id="burgerBtn">
             </button>
@@ -85,7 +93,7 @@
         </div>
             <!--Right side of the screen -->
 
-        <div class=" border-2 border-red-500 w-full">
+        <div class=" border-2 border-red-500 w-full h-[100vh]">
             <!-- including the php file -->
 
             <?php include $pageinclude ?>

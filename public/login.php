@@ -1,7 +1,39 @@
 <?php 
     // login for the dashboard from the single admin
 
-    include "connection.php";
+    require "connection.php";
+
+    require "AdminRegister.php";
+
+
+    if(isset($_POST['login']))
+    
+    {
+        
+    $Email = $_POST['email'];
+    $Password = $_POST['password'];
+        global $hashed_Password;
+        $sql = "select * from adminlogin_tb where Email = ? AND Password = ?";
+        
+        $stmt = mysqli_prepare($conn,$sql);
+
+        mysqli_stmt_bind_param($stmt,'ss', $Email,$Password);
+
+        mysqli_stmt_execute($stmt);
+
+        
+            if(password_verify($Password, $hashed_Password))
+            {
+                header("Location:index.php");
+                // echo "logged in..";
+            }
+            else{
+                echo "incorrect password or email";
+            }
+        
+
+    }
+ 
 
     
 ?>
@@ -38,7 +70,7 @@
                     </div>
                   
                     <div class="flex gap-5 justify-center pt-1 pl-5">
-                        <input type="submit" value="Login" class="border-2 cursor-pointer w-[9vw] rounded-lg bg-black text-2xl hover:border-2 hover:border-[#4723DB] transition duration-200 font-bold hover:bg-indigo-900 text-white">
+                        <input type="submit" value="Login" class="border-2 cursor-pointer w-[9vw] rounded-lg bg-black text-2xl hover:border-2 hover:border-[#4723DB] transition duration-200 font-bold hover:bg-indigo-900 text-white" name="login">
                  
                     </div>
 
