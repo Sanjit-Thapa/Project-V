@@ -1,42 +1,55 @@
-<?php 
-    // login for the dashboard from the single admin
+<?php
 
-    require "connection.php";
+require "connection.php";
+print_r($_POST);
+// Getting the email and password from the login form
 
-    require "AdminRegister.php";
 
-
-    if(isset($_POST['login']))
+if (isset($_POST['login'])) 
+{
+    $Emails = trim($_POST['email']);
+$Passwords = trim($_POST['password']); // Plain text password input by user
+    // Prepare the SQL statement to select user details based on the email
+    $sql = "SELECT * FROM adminlogin_tb WHERE Email = ?";
     
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, 's', $Emails); // Bind the email parameter
+    
+    // Execute the statement
+    mysqli_stmt_execute($stmt);
+    
+    // Get the result set
+    $result = mysqli_stmt_get_result($stmt);
+
+    // Check if the email exists and fetch the row
+    if ($row = mysqli_fetch_assoc($result)) 
     {
-        
-    $Email = $_POST['email'];
-    $Password = $_POST['password'];
-        global $hashed_Password;
-        $sql = "select * from adminlogin_tb where Email = ? AND Password = ?";
-        
-        $stmt = mysqli_prepare($conn,$sql);
+        var_dump($row);
+        // Debugging: Show the entered password and the hashed password from the DB
+        echo "Entered password: " . $Passwords . "<br>";
+        echo "Hashed password from DB: " . $row['Password'] . "<br>";
 
-        mysqli_stmt_bind_param($stmt,'ss', $Email,$Password);
-
-        mysqli_stmt_execute($stmt);
-
-        
-            if(password_verify($Password, $hashed_Password))
-            {
-                header("Location:index.php");
-                // echo "logged in..";
-            }
-            else{
-                echo "incorrect password or email";
-            }
-        
-
+        // Verify the entered password against the hashed password in the database
+        if (password_verify($Passwords, $row['Password'])) {
+            // Password matches - login successful
+            header("Location: index.php"); // Redirect to dashboard or homepage
+            exit(); // Stop further execution
+        } else {
+            // Password does not match
+            echo "Incorrect password.";
+        }
+    } 
+    else {
+        // Email does not exist in the database
+        echo "Invalid email.";
     }
- 
-
-    
+} 
+else {
+    // Handle case where the form was not submitted correctly
+    echo "Error: Login form was not submitted properly.";
+}
 ?>
+
 
 
 <!DOCTYPE html>
