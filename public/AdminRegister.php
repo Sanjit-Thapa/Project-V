@@ -4,7 +4,7 @@
     //setting up the email and password manually into the db
     $Email = "sandipthapa383@gmail.com";
     $password = "admin"; //this password should be hashed properly
-    $img = "./Assets/62021a.jpg";
+    $img = "./Assets/Screenshot(99).png";
 
     //hashing the password using the password_hash method
 
@@ -31,5 +31,7 @@
     else{
         echo "failure to send the data";
     }
+
+    
 
 ?>

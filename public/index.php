@@ -1,7 +1,15 @@
 
 <?php 
-    // include "connection.php";
- 
+    include "connection.php";
+
+   
+    // $sql = "SELECT ImgDir FROM adminlogin_tb WHERE Email = ?";
+
+    // mysqli_prepare($conn,$sql);
+
+    // mysqli_bind_param($sql,'s',)
+    
+
     if(isset($_GET['page']))
     {
         $page = $_GET['page'];
@@ -20,7 +28,21 @@
    }
     
 
-    
+   //for extracting the image into the profile of the admin
+   $sql = "select ImgDir from adminlogin_tb";
+
+   $result = $conn->query($sql);
+
+   if($row=mysqli_fetch_assoc($result))
+   {
+       $url = $row['ImgDir'];
+   }
+   else{
+       echo "umm";
+   }
+
+
+ 
        
    
 ?>
@@ -40,7 +62,7 @@
     <div class="bg-blue-900 flex items-center justify-between">
         <h1 class="text-slate-300 text-[1.8vw] p-1 font-semibold pl-3">Art Gallery</h1>
         <a href="https://www.facebook.com">
-            <img src="" alt="admin" class="w-16 h-14 pr-2 rounded-full text-red-200">
+            <img src="<?php echo $url ?>" alt="admin" class="w-16 h-14 pr-2 rounded-full text-red-200">
         </a>
     </div>
 

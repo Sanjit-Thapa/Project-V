@@ -10,7 +10,7 @@
     {
         die ("Error");
     }
-    else{
-        echo "Connection success";
-    }
+    // else{
+    //     echo "Connection success";
+    // }
 ?>

@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require "connection.php";
 print_r($_POST);
 // Getting the email and password from the login form
@@ -26,14 +28,21 @@ $Passwords = trim($_POST['password']); // Plain text password input by user
     {
         var_dump($row);
         // Debugging: Show the entered password and the hashed password from the DB
-        echo "Entered password: " . $Passwords . "<br>";
-        echo "Hashed password from DB: " . $row['Password'] . "<br>";
+        // echo "Entered password: " . $Passwords . "<br>";
+        // echo "Hashed password from DB: " . $row['Password'] . "<br>";
 
         // Verify the entered password against the hashed password in the database
         if (password_verify($Passwords, $row['Password'])) {
-            // Password matches - login successful
+           
+            $_SESSION['loggedin']=true;
+           
+            if($_SESSION['loggedin']===true)
+            {   
+                 // Password matches - login successful
             header("Location: index.php"); // Redirect to dashboard or homepage
             exit(); // Stop further execution
+            }
+           
         } else {
             // Password does not match
             echo "Incorrect password.";
