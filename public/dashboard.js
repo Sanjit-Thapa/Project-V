@@ -32,6 +32,23 @@ burgerBtn.addEventListener("click", (evt) => {
         sidebar.classList.add("w-[17%]");
     }
 });
+// let profile = document.getElementById("profile");
+// let profileCard = document.getElementById("profileCard");
 
+// let isOpen = false; // To track the state
 
+// profile.addEventListener("click", (event) => {
+//     event.stopPropagation(); // Prevent event from bubbling up
+//     profileCard.classList.toggle("hidden");
+//     profileCard.classList.toggle("block");
+//     isOpen = !isOpen; // Toggle the state
+// });
 
+// // Close the profile card when clicking outside
+// document.addEventListener("click", (event) => {
+//     if (!profile.contains(event.target) && !profileCard.contains(event.target) && isOpen) {
+//         profileCard.classList.add("hidden");
+//         profileCard.classList.remove("block");
+//         isOpen = false; // Reset the state
+//     }
+// });

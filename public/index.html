@@ -29,12 +29,13 @@
     
 
    //for extracting the image into the profile of the admin
-   $sql = "select ImgDir from adminlogin_tb";
+   $sql = "select Email,ImgDir from adminlogin_tb";
 
    $result = $conn->query($sql);
 
    if($row=mysqli_fetch_assoc($result))
    {
+      $mail = $row['Email'];
        $url = $row['ImgDir'];
    }
    else{
@@ -61,13 +62,47 @@
     <!-- header section -->
     <div class="bg-blue-900 flex items-center justify-between">
         <h1 class="text-slate-300 text-[1.8vw] p-1 font-semibold pl-3">Art Gallery</h1>
-        <a href="https://www.facebook.com">
-            <img src="<?php echo $url ?>" alt="admin" class="w-16 h-14 pr-2 rounded-full text-red-200">
+        <a href="" id="profile">
+                <img src="<?php echo $url ?>" alt="admin" class="w-16 h-14 pr-2 rounded-full text-red-200" >
+            
         </a>
+
+    
     </div>
 
 
-   
+    <!-- Profile card options -->
+    <div id="profileCard" class="absolute right-0 mt-4 w-[20vw] bg-white shadow-lg rounded-lg p-4 hidden">
+        <!-- Profile picture and email section -->
+        <div class="flex flex-col items-center justify-center">
+          <img src="<?php echo $url ?>" alt="admin" class="w-12 h-12 rounded-full border-2 border-gray-300"> <!-- Circular profile picture -->
+          <p class="text-[1rem] text-gray-600 pt-1"><?php echo $mail ?></p>
+        </div>
+        
+        <!-- Horizontal line divider -->
+        <hr class="my-3">
+        <!-- <i class="fa-solid fa-person-running"></i> -->
+        
+        <!-- Options section -->
+        <ul class="flex flex-col space-y-2 items-center">
+            <li class="py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md text-center flex items-center justify-center space-x-2 w-full cursor-pointer">
+                <a href="https://www.facebook.com">
+                    <button class="fa-solid fa-images pr-2"></button>
+                    <span>Change Profile</span>
+                </a>
+            
+              </li>
+              <li class="py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md text-center flex items-center justify-center space-x-2 w-full cursor-pointer">
+                <a href="https://www.facebook.com">
+                    <button class="fa-solid fa-person-running pr-2 " ></button>
+                    <span>Sign Out</span>
+                </a>
+            
+              </li>
+            
+        </ul>
+      </div>
+
     <!-- side bar section -->
     <div class="flex">
         <div class="w-[17%] h-[100vh]  bg-blue-900 " id="menu">
@@ -119,12 +154,9 @@
             <!-- including the php file -->
 
             <?php include $pageinclude ?>
+
         </div>
     </div>
-   
-
-
-   
 
     <script src="dashboard.js"></script>
 </body>
