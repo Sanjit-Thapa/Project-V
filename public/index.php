@@ -43,8 +43,33 @@
    }
 
 
- 
-       
+   //for the updation of the profile picture
+   
+   if (isset($_FILES['reimg'])) {
+    // Get the uploaded file information
+    $fileTmpName = $_FILES['reimg']['tmp_name'];  // Temporary file path
+    $fileName = $_FILES['reimg']['name'];         // Original file name
+    $fileDestination = 'uploads/' . $fileName;    // Destination folder
+
+    // Move the uploaded file to the destination folder
+    if (move_uploaded_file($fileTmpName, $fileDestination)) {
+        // Update the database with the new image path
+        $imgupd = "UPDATE adminlogin_tb SET ImgDir = '$fileDestination' WHERE ImgDir = '$url'";
+        $res = $conn->query($imgupd);
+
+        if ($res) {
+            echo "Profile picture updated successfully.";
+        } else {
+            echo "Error updating the database.";
+        }
+    } else {
+        echo "Failed to upload the image.";
+    }
+} else {
+    echo "No file was uploaded.";
+}
+
+
    
 ?>
 
@@ -62,7 +87,7 @@
     <!-- header section -->
     <div class="bg-blue-900 flex items-center justify-between">
         <h1 class="text-slate-300 text-[1.8vw] p-1 font-semibold pl-3">Art Gallery</h1>
-        <a href="" id="profile">
+        <a href="?page=" id="profile">
                 <img src="<?php echo $url ?>" alt="admin" class="w-16 h-14 pr-2 rounded-full text-red-200" >
             
         </a>
@@ -72,7 +97,7 @@
 
 
     <!-- Profile card options -->
-    <div id="profileCard" class="absolute right-0 mt-4 w-[20vw] bg-white shadow-lg rounded-lg p-4 hidden">
+    <div id="profileCard" class="absolute right-0 mt-4 w-[20vw] bg-white shadow-lg rounded-lg p-4 ">
         <!-- Profile picture and email section -->
         <div class="flex flex-col items-center justify-center">
           <img src="<?php echo $url ?>" alt="admin" class="w-12 h-12 rounded-full border-2 border-gray-300"> <!-- Circular profile picture -->
@@ -86,7 +111,7 @@
         <!-- Options section -->
         <ul class="flex flex-col space-y-2 items-center">
             <li class="py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md text-center flex items-center justify-center space-x-2 w-full cursor-pointer">
-                <a href="https://www.facebook.com">
+                <a href="?page=">
                     <button class="fa-solid fa-images pr-2"></button>
                     <span>Change Profile</span>
                 </a>
@@ -102,6 +127,40 @@
             
         </ul>
       </div>
+
+      <!-- changing the profile picture -->
+       
+      <div class="flex justify-center shadow-lg rounded-lg ">
+    <div class="border-2 border-red-00 bg-white w-[25vw] h-[60vh] absolute rounded-lg">
+        <div>
+            <button class="text-2xl font-bold text-blue-400"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <hr class="opacity-1">
+        <h1 class="text-2xl mt-1 pr-1 text-center">Profile Picture</h1>
+        <p class="text-center">You can change your profile picture here.</p>
+        <div class="flex justify-center item-center pt-4 text-green-400">
+            <img src="<?php echo $url ?>" alt="profile" class="w-52 h-52 rounded-full">
+        </div>
+
+        <!-- Form for file upload -->
+        <form action="" method="POST" enctype="multipart/form-data" class="flex items-center justify-center mt-3">
+            <!-- The button for changing the profile photo -->
+            <label for="reimg" class="cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+              Change Profile Photo
+            </label>
+
+            <!-- Hidden file input -->
+            <input type="file" name="reimg" id="reimg" accept="image/*" class="hidden">
+
+            <!-- Submit button -->
+            <button type="submit" name="submit" class="ml-3 bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600">
+              Upload
+            </button>
+        </form>
+    </div>
+</div>
+
+        
 
     <!-- side bar section -->
     <div class="flex">
