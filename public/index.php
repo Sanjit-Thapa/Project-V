@@ -24,6 +24,7 @@
         }
     }
    else{
+    $pageinclude = "ad.php";
     // $pageinclude = "";//make this as the dashboard part whenever the user visits they firstly see this part //work to be done
    }
     
@@ -43,34 +44,53 @@
    }
 
 
-   //for the updation of the profile picture
+   //for the getting the image file store into the local folder
    
-   if (isset($_FILES['reimg'])) {
-    // Get the uploaded file information
-    $fileTmpName = $_FILES['reimg']['tmp_name'];  // Temporary file path
-    $fileName = $_FILES['reimg']['name'];         // Original file name
-    $fileDestination = 'uploads/' . $fileName;    // Destination folder
+   if(isset($_POST['submit']))//check if the submit button is pressed
+   {
+    if(isset($_FILES['reimg']))//check if the file is uploaded where as the $_FILES is the super global variable that handles various activites related to the file 
+    {
+        $fileTempName = $_FILES['reimg']['tmp_name'];//getting the temporary file path into the variable where the img will be stored firstly
+        $filename = $_FILES['reimg']['name'];//original file name 
+        $fileError = $_FILES['reimg']['error'];
+    
 
-    // Move the uploaded file to the destination folder
-    if (move_uploaded_file($fileTmpName, $fileDestination)) {
-        // Update the database with the new image path
-        $imgupd = "UPDATE adminlogin_tb SET ImgDir = '$fileDestination' WHERE ImgDir = '$url'";
-        $res = $conn->query($imgupd);
+    if($fileError===0)//checking if there is error or not
+    {
+        $filedest = './Assets/'.$filename; //where the ./Assets/is the location where the file will be stored in the local folder inside the project folder 
 
-        if ($res) {
-            echo "Profile picture updated successfully.";
+        if (move_uploaded_file($fileTempName, $filedest)) {
+            echo "File uploaded successfully!";
+
+            //updation of the profile picture
+
+            $sqlupd = "update adminlogin_tb set ImgDir = '$filedest' where ImgDir = '$url'";
+
+            $resupd=$conn->query($sqlupd);
+
+            if($resupd===true)
+            {
+                echo "image updation success...";
+            }
+            else{
+                echo "Image is not updated";
+            }
         } else {
-            echo "Error updating the database.";
-        }
-    } else {
-        echo "Failed to upload the image.";
+            echo "Failed to upload the file.";
+        }//moving the file from the temp file to the destination file
+    
     }
-} else {
-    echo "No file was uploaded.";
 }
-
-
+    else{
+        echo "No file is uploaded";
+     }
+   }
+    else{
+        echo "Form is not submitted";
+    }
    
+    //updation of the profile picture
+    
 ?>
 
 
@@ -87,17 +107,15 @@
     <!-- header section -->
     <div class="bg-blue-900 flex items-center justify-between">
         <h1 class="text-slate-300 text-[1.8vw] p-1 font-semibold pl-3">Art Gallery</h1>
-        <a href="?page=" id="profile">
+        <a id="profile">
                 <img src="<?php echo $url ?>" alt="admin" class="w-16 h-14 pr-2 rounded-full text-red-200" >
             
         </a>
-
-    
     </div>
 
 
     <!-- Profile card options -->
-    <div id="profileCard" class="absolute right-0 mt-4 w-[20vw] bg-white shadow-lg rounded-lg p-4 ">
+    <div id="profileCard" class="absolute flex-col right-0 mt-4 w-[20vw] bg-white shadow-lg rounded-lg p-4 hidden">
         <!-- Profile picture and email section -->
         <div class="flex flex-col items-center justify-center">
           <img src="<?php echo $url ?>" alt="admin" class="w-12 h-12 rounded-full border-2 border-gray-300"> <!-- Circular profile picture -->
@@ -110,13 +128,13 @@
         
         <!-- Options section -->
         <ul class="flex flex-col space-y-2 items-center">
-            <li class="py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md text-center flex items-center justify-center space-x-2 w-full cursor-pointer">
-                <a href="?page=">
+          
+                 <li class="py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md text-center flex items-center justify-center space-x-2 w-full cursor-pointer" id="changeProfile">
+   
                     <button class="fa-solid fa-images pr-2"></button>
                     <span>Change Profile</span>
-                </a>
-            
               </li>
+              <!-- <a href="?page=" class="hover:bg-red-600 w-full"></a> -->
               <li class="py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md text-center flex items-center justify-center space-x-2 w-full cursor-pointer">
                 <a href="https://www.facebook.com">
                     <button class="fa-solid fa-person-running pr-2 " ></button>
@@ -130,12 +148,12 @@
 
       <!-- changing the profile picture -->
        
-      <div class="flex justify-center shadow-lg rounded-lg ">
-    <div class="border-2 border-red-00 bg-white w-[25vw] h-[60vh] absolute rounded-lg">
+      <div class="flex justify-center shadow-lg rounded-lg hidden" id="profilePicture">
+        <div class="border-2 border-red-00 bg-white w-[25vw] h-[60vh] absolute rounded-lg">
         <div>
-            <button class="text-2xl font-bold text-blue-400"><i class="fa-solid fa-xmark"></i></button>
+            <button class="fa-solid fa-xmark text-2xl font-bold text-blue-400" id="exit"></button>
         </div>
-        <hr class="opacity-1">
+        <hr class="opacity-1">  
         <h1 class="text-2xl mt-1 pr-1 text-center">Profile Picture</h1>
         <p class="text-center">You can change your profile picture here.</p>
         <div class="flex justify-center item-center pt-4 text-green-400">
@@ -143,7 +161,7 @@
         </div>
 
         <!-- Form for file upload -->
-        <form action="" method="POST" enctype="multipart/form-data" class="flex items-center justify-center mt-3">
+        <form action="index.php" method="POST" enctype="multipart/form-data" class="flex items-center justify-center mt-3">
             <!-- The button for changing the profile photo -->
             <label for="reimg" class="cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
               Change Profile Photo
