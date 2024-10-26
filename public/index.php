@@ -148,7 +148,7 @@
 
       <!-- changing the profile picture -->
        
-      <div class="flex justify-center shadow-lg rounded-lg hidden" id="profilePicture">
+      <div class="flex justify-center shadow-lg  z-50 rounded-lg hidden" id="profilePicture" >
         <div class="border-2 border-red-00 bg-white w-[25vw] h-[60vh] absolute rounded-lg">
         <div>
             <button class="fa-solid fa-xmark text-2xl font-bold text-blue-400" id="exit"></button>
