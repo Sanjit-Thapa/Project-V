@@ -1,6 +1,35 @@
 <?php
+require "../connection.php";
 
-echo "hell";
+// inserting the data into the Artist database
+
+if(isset($_POST['Signup'])){
+    // Accessing All the inputs data from the form
+    $ArtistName =  trim($_POST['username']);
+    $ArtistEmail =  trim($_POST['ArtistEmail']);
+    $ArtistPassword = trim( $_POST['ArtistPassword']);
+
+    $hashedPassword = password_hash($ArtistPassword,PASSWORD_DEFAULT);
+
+    //now creating the sql query
+    $ArtistIns = "INSERT INTO artistsignup_tb (Username, Artistmail, ArtistPassword) VALUES (?, ?, ?);
+";
+
+    //preparing the statement
+
+    $stmt = $conn->prepare($ArtistIns);
+
+    //binding the input with the querry
+
+    mysqli_stmt_bind_param($stmt,'sss',$ArtistName,$ArtistEmail,$hashedPassword);
+
+    // Now execution of the statement
+    if(mysqli_stmt_execute($stmt))
+     {
+        echo "inserted the Artist details";
+     }
+}
+
 
 ?>
 
@@ -12,11 +41,11 @@ echo "hell";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artist</title>
-    <link rel="stylesheet" href="/public/style.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
-<body class="bg-red-500 stroke-white">
+<body class="bg-red-500">
     <!-- top level of the Artist Signup -->
      <div class="bg-indigo-400">
         <h1 class="text-3xl p-2 font-serif italic text-slate-900 ">Register Yourself</h1>
@@ -27,6 +56,8 @@ echo "hell";
                 <div class="font-medium pt-2" >
                     <h1 class="text-[2vw]">Artist Signup</h1>
                 </div>
+                <!-- form for the signup -->
+
              <form action="ArtistSign.php" method="post" class="login flex flex-col  pt-4 gap-[1.8vw] text-[1.2vw] items-center">
     
                 <div class="relative">
