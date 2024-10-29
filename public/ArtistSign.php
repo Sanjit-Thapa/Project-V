@@ -1,5 +1,5 @@
 <?php
-require "../connection.php";
+require "connection.php";
 
 // inserting the data into the Artist database
 
@@ -41,7 +41,7 @@ if(isset($_POST['Signup'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artist</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
@@ -86,14 +86,9 @@ if(isset($_POST['Signup'])){
                             <div class="flex flex-col items-center gap-2">
                                 <input type="submit" value="Login" class="border-2 cursor-pointer w-[9vw] rounded-lg bg-black text-2xl h-[6vh] hover:border-2 hover:border-[#4723DB] transition duration-200 font-bold hover:bg-indigo-900 text-white" name="ArtistLogin">
                             </div>
-                        </div>
-                        
-                        
-                        
+                        </div>        
                      </form>
-    
             </div>
-           
         </div>
 </body>
 </html>

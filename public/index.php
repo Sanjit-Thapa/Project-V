@@ -22,6 +22,9 @@
         elseif($page=='display'){
             $pageinclude = "login.php";
         }
+        elseif($page='artist'){
+            $pageinclude = "ArtistStatus.php";
+        }
     }
    else{
     $pageinclude = "ad.php";
@@ -207,7 +210,7 @@
     
             <div class="m-3 ">
             <a href="#"><button class="fa-solid fa-palette text-[1.8vw] text-white p-3  hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5">
-            </button></a> <label for="artist" class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="#">Artist</a></label>
+            </button></a> <label for="artist" class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="?page=artist">Artist</a></label>
             </div>
     
             <div class="m-3 ">
