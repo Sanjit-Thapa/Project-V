@@ -1,59 +1,103 @@
 <?php 
     require "connection.php";
-
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
  
 
-    if(isset($_POST['Reject']))
-    {
-        $Decide = $_POST['Reject'];
+    if (isset($_POST['Reject']) || isset($_POST['Accept'])) {
+        // Determine the status decision based on which button was pressed
+        $Decide = isset($_POST['Reject']) ? $_POST['Reject'] : $_POST['Accept'];
         $num = $_POST['id'];
+        
+        //selection of the email address to which the mail should be sent out
+         $sqlSel = "select Artistmail from artistsignup_tb where Artist_Id = $num";
 
-        // echo "$Decide";
-        $sqlUpd = "update artistsignup_tb set Status = ? where Artist_Id = ? ";
-        // echo "The num is $num";
+         $resultSel = $conn -> query($sqlSel);
+         
+         if($row = mysqli_fetch_assoc($resultSel))
+         {
+                $recieptant =  $row['Artistmail'];
+         }
+         else{
+            echo "sorry the mail couldn't be found";
+         }
+         
+        
+        // Prepare the SQL statement
+        $sqlUpd = "UPDATE artistsignup_tb SET Status = ? WHERE Artist_Id = ?";
         $stm = $conn->prepare($sqlUpd);
-
-        $stm->bind_param('si',$Decide,$num);
-
-        if($stm->execute()===true)
-        {
-            echo "successfully updated the status";
-            $stm->close();
-        }
-        else{
-            echo "sorry the status couldnt be updated";
-        }
-    }
-    else{
-        echo "something might be missing";
-    }
-
-    // now for the Approved
     
-    if(isset($_POST['Accept']))
+        $stm->bind_param('si', $Decide, $num);
+    
+        // Execute the query and check if the update was successful
+        if ($stm->execute() === true) {
+            echo "Status successfully updated to '$Decide'.";
+            mailing( $recieptant, $Decide);
+        } else {
+            echo "Sorry, the status couldn't be updated.";
+        }
+        
+        $stm->close();
+    } else {
+        echo "Something might be missing.";
+    }
+    
+
+    //mail code
+
+    function mailing($recieptant,$Decide)
     {
-        $Decide = $_POST['Accept'];
-        $num = $_POST['id'];
+    
+    //Load Composer's autoloader
+   require 'PHPmailer/Exception.php';
+   require 'PHPmailer/PHPMailer.php';
+   require 'PHPmailer/SMTP.php';
+ 
+//Create an instance; passing `true` enables exceptions
+$mail = new PHPMailer(true);
 
-        // echo "$Decide";
-        $sqlUpd = "update artistsignup_tb set Status = ? where Artist_Id = ? ";
-        // echo "The num is $num";
-        $stm = $conn->prepare($sqlUpd);
+try {
+    //Server settings
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+    $mail->isSMTP();                                            //Send using SMTP
+    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+    $mail->Username   = 'sandipthapa383@gmail.com';                     //SMTP username
+    $mail->Password   = 'jliq upqi xiek xfse';                               //SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-        $stm->bind_param('si',$Decide,$num);
+    //Recipients
+    $mail->setFrom('sandipthapa383@gmail.com', 'Mailer');
+    $mail->addAddress($recieptant, 'Artist');     //Add a recipient
+ 
 
-        if($stm->execute()===true)
-        {
-            echo "successfully updated the status";
-            $stm->close();
-        }
-        else{
-            echo "sorry the status couldnt be updated";
-        }
+    //Attachments
+    // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+    //Content
+    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->Subject = 'Here is the subject';
+    if($Decide === "Approved")
+    {
+        $mail->Body    = "sender message: You are $Decide and now you can enter your email and password to login";
     }
     else{
-        echo "something might be missing";
+        $mail->Body    = "sender message: Sorry you are $Decide but you can again enter the details through the signup form";
     }
+
+    $mail->send();
+    echo 'Message has been sent';
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
+
+    }
+
+    
+
     
 ?>
 
