@@ -23,7 +23,6 @@
             echo "sorry the mail couldn't be found";
          }
          
-        
         // Prepare the SQL statement
         $sqlUpd = "UPDATE artistsignup_tb SET Status = ? WHERE Artist_Id = ?";
         $stm = $conn->prepare($sqlUpd);
@@ -33,16 +32,38 @@
         // Execute the query and check if the update was successful
         if ($stm->execute() === true) {
             echo "Status successfully updated to '$Decide'.";
-            mailing( $recieptant, $Decide);
+            mailing( $recieptant, $Decide);//to send the mail alert about the status to the certain artist who were signed up
+          
         } else {
             echo "Sorry, the status couldn't be updated.";
         }
+
+         if($Decide==="Rejected")
+            {
+                removeUser($recieptant);
+            }
         
         $stm->close();
     } else {
         echo "Something might be missing.";
     }
     
+
+    //removing the Rejected user from the the Database 
+
+    function removeUser($rec)
+    {
+        require "connection.php";
+        global $Decide;
+       $sqlRem = "Delete from artistsignup_tb where Artistmail = '$rec'";
+        
+      $result = $conn->query($sqlRem);
+
+      if($result){
+            echo "Deleted since status is $Decide";
+      }
+      
+    }
 
     //mail code
 
