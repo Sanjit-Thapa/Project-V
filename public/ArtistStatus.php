@@ -70,7 +70,7 @@
     function mailing($recieptant,$Decide)
     {
     
-    //Load Composer's autoloader
+//Load Composer's autoloader
    require 'PHPmailer/Exception.php';
    require 'PHPmailer/PHPMailer.php';
    require 'PHPmailer/SMTP.php';
