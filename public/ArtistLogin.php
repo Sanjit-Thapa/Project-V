@@ -77,7 +77,7 @@ else {
     </style>
 </head>
 </head>
-<body class="flex items-center justify-center h-screen bg-gradient-to-br from-teal-200 via-blue-100 to-indigo-200">
+<body class=" h-screen bg-gradient-to-br from-teal-200 via-blue-100 to-indigo-200">
 
     <!-- Catchy Header Section -->
     <div class="absolute top-0 w-full bg-gradient-to-r from-indigo-400 to-teal-400 py-5 text-center shadow-md">
@@ -86,7 +86,8 @@ else {
     </div>
 
     <!-- Glassmorphism Login Form Container -->
-    <div class="glass-card w-full max-w-sm p-6 mt-32 rounded-lg">
+     <div class="flex justify-center items-center">
+     <div class="glass-card w-full max-w-sm p-6 mt-32 rounded-lg">
         <h2 class="text-2xl font-bold text-center text-gray-700 mb-6">Artist Login</h2>
         
         <!-- Form Starts Here -->
@@ -96,7 +97,7 @@ else {
             <div>
                 <label for="email" class="block text-gray-700 mb-1">Email</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required 
-                       class="w-full px-4 py-2 border rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-300 focus:border-transparent">
+                       class="w-full px-4 py-2 text-black border rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-300 focus:border-transparent">
             </div>
             
             <!-- Password Field -->
@@ -119,6 +120,8 @@ else {
             
         </form>
     </div>
+     </div>
+  
 
 </body>
 

@@ -66,19 +66,19 @@ if(isset($_POST['Signup'])){
                 <!-- Username Field -->
                 <div class="relative w-full">
                     <i class="fa-solid fa-user absolute left-3 top-4 text-gray-500"></i>
-                    <input type="text" class="border-2 w-full h-12 rounded-lg pl-10 pr-4 border-gray-300 placeholder-gray-500 focus:border-indigo-600 focus:outline-none transition duration-200" placeholder="Username" name="username" id="username" required>
+                    <input type="text" class="border-2 w-full h-12 rounded-lg pl-10 pr-4 border-gray-300 placeholder-gray-500 text-black focus:border-indigo-600 focus:outline-none transition duration-200" placeholder="Username" name="username" id="username" required>
                 </div>
 
                 <!-- Email Field -->
                 <div class="relative w-full">
                     <i class="fa-solid fa-envelope absolute left-3 top-4 text-gray-500"></i>
-                    <input type="email" class="border-2 w-full h-12 rounded-lg pl-10 pr-4 border-gray-300 placeholder-gray-500 focus:border-indigo-600 focus:outline-none transition duration-200" placeholder="Email" name="ArtistEmail" id="email" required>
+                    <input type="email" class="border-2 w-full h-12 rounded-lg pl-10 pr-4 text-black  border-gray-300 placeholder-gray-500 focus:border-indigo-600 focus:outline-none transition duration-200" placeholder="Email" name="ArtistEmail" id="email" required>
                 </div>
 
                 <!-- Password Field -->
                 <div class="relative w-full">
                     <i class="fa-solid fa-lock absolute left-3 top-4 text-gray-500"></i>
-                    <input type="password" name="ArtistPassword" id="password" class="border-2 w-full h-12 rounded-lg pl-10 pr-4 border-gray-300 placeholder-gray-500 focus:border-indigo-600 focus:outline-none transition duration-200" placeholder="Password" required>
+                    <input type="password" name="ArtistPassword" id="password" class="border-2 w-full h-12 rounded-lg pl-10 pr-4 border-gray-300 placeholder-gray-500 focus:border-indigo-600 focus:outline-none text-black  transition duration-200" placeholder="Password" required>
                 </div>
 
                 <!-- Submit Buttons -->
