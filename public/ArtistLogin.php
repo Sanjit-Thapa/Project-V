@@ -1,18 +1,27 @@
 <?php 
     require "connection.php";
 
- 
+    session_start();
 
+    $sql = "SELECT Artist_Id, Username, Artistmail, ArtistPassword 
+    FROM artistsignup_tb 
+    WHERE Status = ? AND Artistmail = ?";
+$status = 'Approved';
 
+$stmt = mysqli_prepare($conn, $sql);
+mysqli_stmt_bind_param($stmt, 'ss', $status, $Email);
     if (isset($_POST['submit'])) 
 {
     $Email = $_POST['email'];
     $Password = $_POST['password']; // Plain text password input by user
     // Prepare the SQL statement to select user details based on the email
-    $sql = "SELECT Username, Artistmail, ArtistPassword FROM artistsignup_tb WHERE Status = ?";
+    $sql = "SELECT Artist_Id, Username, Artistmail, ArtistPassword 
+    FROM artistsignup_tb 
+    WHERE Status = ? AND Artistmail = ?";
     $status = 'Approved';
+
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 's', $status); // Bind the email parameter
+    mysqli_stmt_bind_param($stmt, 'ss', $status, $Email); // Bind the email parameter
     
     // Execute the statement
     mysqli_stmt_execute($stmt);
@@ -24,19 +33,25 @@
     if ($row = mysqli_fetch_assoc($result)) 
     {
         var_dump($row);
+        $id = $row['Artist_Id'];
+        $mail = $row['Artistmail'];
         // Debugging: Show the entered password and the hashed password from the DB
         // echo "Entered password: " . $Passwords . "<br>";
         // echo "Hashed password from DB: " . $row['Password'] . "<br>";
 
         // Verify the entered password against the hashed password in the database
-        if (password_verify($Password, $row['ArtistPassword'])) {
-           
+        if (password_verify($Password, $row['ArtistPassword'])) {  
             $_SESSION['loggedin']=true;
            
             if($_SESSION['loggedin']===true)
             {   
                  // Password matches - login successful
-            header("Location: index.php"); // Redirect to dashboard or homepage
+                 $_SESSION['artist_id']=$id;
+                 $_SESSION['artist_mail']=$Email;
+
+                 echo  $_SESSION['artist_id'];
+
+            header("Location:ArtistView.php"); // Redirect to dashboard or homepage
             exit(); // Stop further execution
             }
            

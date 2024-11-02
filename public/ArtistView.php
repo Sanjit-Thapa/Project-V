@@ -1,6 +1,11 @@
 <?php 
+    session_start();
 
-    
+ global $_SESSION;
+ if($_SESSION['loggedin']===true){
+    echo $_SESSION['artist_id'];
+
+ }
 
 ?>
 
