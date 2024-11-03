@@ -1,11 +1,32 @@
 <?php 
+require "connection.php";
     session_start();
 
- global $_SESSION;
+//  global $_SESSION;
  if($_SESSION['loggedin']===true){
-    echo $_SESSION['artist_id'];
+    $id = $_SESSION['artist_id'];
+    echo $id;
 
- }
+    $sqlSel = "select Username,Artistmail from artistsignup_tb where Artist_Id = ?";
+
+     $stm = mysqli_prepare($conn,$sqlSel);
+
+      mysqli_stmt_bind_param($stm,'i',$id);
+
+    // Execute the statement
+    mysqli_stmt_execute($stm);
+
+    // Get the result set
+    $result = mysqli_stmt_get_result($stm);
+
+    if($row = mysqli_fetch_assoc($result)){
+
+        $username = $row['Username'];
+        $ArtistEmail = $row['Artistmail'];
+    }
+
+}
+
 
 ?>
 
@@ -98,7 +119,7 @@
             <!-- Profile Section -->
             <section id="profile" class="bg-white shadow rounded-lg p-6">
                 <h3 class="text-2xl font-bold mb-4 text-indigo-700">Profile</h3>
-                <p class="text-lg">Welcome back, <strong>Artist Name</strong>!</p>
+                <p class="text-lg">Welcome back, <strong><?php echo $username ?></strong>!</p>
                 <p class="text-gray-600">This is your personal dashboard. You can view, manage, and submit your artworks here.</p>
             </section>
         </main>
