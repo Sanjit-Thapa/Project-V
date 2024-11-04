@@ -25,6 +25,53 @@ require "connection.php";
         $ArtistEmail = $row['Artistmail'];
     }
 
+    //now uploading the datas related with the Artists respectively...
+
+    if (isset($_POST['submit'])) {
+        global $id;
+        $artTitle = trim($_POST['Title']);
+        $artDescription = trim($_POST['description']);
+        $artForm = trim($_POST['artform']);
+    
+        echo $artTitle;
+    
+        if (isset($_FILES['img'])) { // Check if the file was uploaded
+            $fileTempName = $_FILES['img']['tmp_name']; // Temp file path
+            $filename = uniqid() . '_' . $_FILES['img']['name']; // Unique file name
+            $fileError = $_FILES['img']['error'];
+    
+            if ($fileError === 0) { // No file error
+                $filedest = './Assets/ArtistProfile/' . $filename; // Set the destination path
+    
+                if (move_uploaded_file($fileTempName, $filedest)) {
+                    echo "File uploaded successfully!";
+    
+                    // Prepare SQL insert query
+                    $sqlIns = "INSERT INTO artistview_tb (ArtistId, ArtTitle, Description, ArtForm, ImgPath) VALUES (?, ?, ?, ?, ?)";
+    
+                    // Prepare the statement
+                    $stm = mysqli_prepare($conn, $sqlIns);
+    
+                    // Bind the parameters
+                    mysqli_stmt_bind_param($stm, 'issss', $id, $artTitle, $artDescription, $artForm, $filedest);
+    
+                    // Execute the statement
+                    if (mysqli_stmt_execute($stm)) {
+                        echo "Data insertion successful!";
+                    } else {
+                        echo "Data insertion failed: " . mysqli_error($conn);
+                    }
+                } else {
+                    echo "File upload failed: Could not move the file.";
+                }
+            } else {
+                echo "Error in the file upload. Error code: " . $fileError;
+            }
+        } else {
+            echo "No file uploaded.";
+        }
+    }
+
 }
 
 
@@ -59,21 +106,20 @@ require "connection.php";
             <!-- Upload Artwork Section -->
             <section id="upload" class="bg-white shadow rounded-lg p-6">
                 <h3 class="text-2xl font-bold mb-4 text-indigo-700">Upload Artwork</h3>
-                <form class="space-y-4">
-                    <input type="text" placeholder="Title of the Artwork" class="w-full border rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                <form action="ArtistView.php" method="post" class="space-y-4" enctype="multipart/form-data">
+                    <input type="text" placeholder="Title of the Artwork" class="w-full border rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-300" name="Title">
                     
-                    <textarea placeholder="Description" class="w-full border rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-300"></textarea>
+                    <textarea placeholder="Description" class="w-full border rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-300" name="description"></textarea>
 
-                    <select class="w-full border rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                    <select class="w-full border rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-300" name="artform">
                         <option>Select Art Form</option>
                         <option>Painting</option>
                         <option>Sculpture</option>
                         <option>Digital Art</option>
                         <!-- Add other art forms as needed -->
                     </select>
-
-                    <input type="file" class="w-full border rounded p-3 mb-4 cursor-pointer focus:outline-none">
-                    <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-800 transition">Submit Artwork</button>
+                    <input type="file" name="img" id="img" accept="image/*" class="w-full border rounded p-3 mb-4 cursor-pointer focus:outline-none">
+                    <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-800 transition" name="submit">Submit Artwork</button>
                 </form>
             </section>
 
