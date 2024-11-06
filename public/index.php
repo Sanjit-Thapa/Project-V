@@ -13,7 +13,7 @@
     if(isset($_GET['page']))
     {
         $page = $_GET['page'];
-
+        echo $page;
         if($page=='setting')
         {
            $pageinclude =  "setting.php";
@@ -22,10 +22,15 @@
         elseif($page=='display'){
             $pageinclude = "login.php";
         }
-        elseif($page='artist'){
+        elseif($page=='artist'){
             $pageinclude = "ArtistStatus.php";
         }
-    }
+        elseif($page=='status')
+    {
+        $pageinclude = "Artstatus.php";
+        
+    }  
+  }
    else{
     $pageinclude = "ad.php";
     // $pageinclude = "";//make this as the dashboard part whenever the user visits they firstly see this part //work to be done
@@ -185,7 +190,7 @@
 
     <!-- side bar section -->
     <div class="flex">
-        <div class="w-[17%] h-[100vh]  bg-blue-900 " id="menu">
+        <div class="w-[17%] max-h-full  bg-blue-900 " id="menu">
             <!-- Buttons in the sidebar -->
             <button class="fa-solid fa-bars text-[1.8vw] text-white p-2 hover:text-[#3b1066] transition ease-in-out delay-10 cursor bg-gradient-to-r from-blue-800 via-cyan-700 to-teal-500  w-full" id="burgerBtn">
             </button>
@@ -193,8 +198,16 @@
             <div class="flex flex-col justify-start items-start  "> 
                 <div class="m-3">
                    <a href="https://www.facebook.com"> <button class="fa-solid fa-chart-simple text-[1.8vw] text-white p-3  hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5">
-                   </button></a> <label for="dashboard" class= "label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400" ><a href="#">Dashboard</a></label>
+                  </button></a> <label for="dashboard" class= "label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400" ><a href="#">Dashboard</a></label>
                 </div>
+
+                <div class="m-3">
+                  <a href="#"><button class="fa-solid fa-clock text-[1.8vw] text-white p-3 hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5"></button></a>
+           
+            
+                  <label for="status" class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400"><a href="?page=status">Art Status</a></label>
+    
+            </div>
              
             <div class="m-3">
                  <a href="#"> <button class="fa-brands fa-telegram text-[1.8vw] text-white p-3  hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5">
@@ -230,7 +243,7 @@
         </div>
             <!--Right side of the screen -->
 
-        <div class=" border-2 border-red-500 w-full h-[100vh]">
+        <div class=" border-2 border-red-500 w-full max-h-full">
             <!-- including the php file -->
 
             <?php include $pageinclude ?>

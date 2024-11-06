@@ -75,6 +75,8 @@ require "connection.php";
 }
 
 
+
+
 ?>
 
 
@@ -137,12 +139,52 @@ require "connection.php";
                     </thead>
                     <tbody>
                         <!-- Example row -->
-                        <tr>
+                         <?php
+                            $sqlSel = "select ArtTitle,ArtForm,Status,Remarks from artistview_tb where Artistid = ?";
+
+                            $stm = $conn->prepare($sqlSel);
+
+                             $stm->bind_param('i',$id);
+                            echo $id;
+
+                            $result = $stm->execute();
+
+                            if($result)
+                            {
+                                $result = $stm->get_result();
+                                while($row =mysqli_fetch_assoc($result))
+                                {
+                                    // $title = $row['ArtTitle'];
+                                    // $artform = $row['ArtForm'];
+                                    // $status = $row['Status'];
+                                    // $remarks = $row['Remarks'];
+    
+                                    
+                                    echo "<tr class='border-b hover:bg-gray-100'>";
+            
+            
+                                    // Art Title, Description, Art Form
+                                    echo "<td class='p-2 text-sm border border-slate-600 break-words max-w-xs overflow-hidden'>" . htmlspecialchars($row['ArtTitle']) . "</td>";
+                                    echo "<td class='p-2 text-sm border border-slate-600 break-words max-w-xs overflow-hidden'>" . htmlspecialchars($row['ArtForm']) . "</td>";
+                                    echo "<td class='p-1 text-sm border border-slate-600 break-words max-w-xs overflow-hidden h-16'>" . htmlspecialchars($row['Status']) . "</td>"; // Smaller height
+                                    echo "<td class='p-2 text-sm border border-slate-600 break-words max-w-xs overflow-hidden'>" . htmlspecialchars($row['Remarks']) . "</td>";
+            
+    
+                                }
+                            }
+                            else{
+                                echo "The query is not executed";
+                            }
+                    
+                            
+
+                         ?>
+                        <!-- <tr>
                             <td class="p-3 border-b">Sunset Painting</td>
                             <td class="p-3 border-b">Painting</td>
                             <td class="p-3 border-b text-yellow-500">Pending</td>
                             <td class="p-3 border-b">N/A</td>
-                        </tr>
+                        </tr> -->
                         <!-- More rows dynamically added as necessary -->
                     </tbody>
                 </table>

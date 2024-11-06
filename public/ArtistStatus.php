@@ -146,37 +146,42 @@ try {
           
             <?php
 
-        if ($result) {
+     
             $sqlget = "select Artist_id,Username,Artistmail,Status from artistsignup_tb";
 
             $result = $conn->query($sqlget);
             // Loop through each row and output data in table rows
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo "<form action='ArtistStatus.php' method = 'POST' >";
-                echo "<tr class='border-2 p-2 hover:bg-gray-200' >";
-                echo "<td><input type='number' name='id' value='{$row['Artist_id']}' readonly class='w-16 h-6 text-center bg-transparent border-none pointer-events-none'></td>";
-                ;
-                echo "<td>" . $row['Username'] . "</td>";
-                echo "<td>" . $row['Artistmail'] . "</td>";
-                echo "<td>" . $row['Status'] . "</td>";
-                echo "<td class='p-3'>
-                <button name='Reject' class='border-2 font-semibold hover:bg-red-700 hover:text-white 
-            rounded-full bg-red-500 text-white w-[6vw] h-[5vh] transition duration-300 ease-in-out' value='Rejected'>
-                Rejected
-             </button>
-
-                 <button name='Accept' class='ml-4 border-2 font-semibold hover:bg-green-700 hover:text-white 
-                    rounded-full bg-green-500 text-white w-[6vw] h-[5vh] transition duration-300 ease-in-out' value='Approved' >
-                      Approved
+            if($result)
+            {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<form action='ArtistStatus.php' method = 'POST' >";
+                    echo "<tr class='border-2 p-2 hover:bg-gray-200' >";
+                    echo "<td><input type='number' name='id' value='{$row['Artist_id']}' readonly class='w-16 h-6 text-center bg-transparent border-none pointer-events-none'></td>";
+                    ;
+                    echo "<td>" . $row['Username'] . "</td>";
+                    echo "<td>" . $row['Artistmail'] . "</td>";
+                    echo "<td>" . $row['Status'] . "</td>";
+                    echo "<td class='p-3'>
+                    <button name='Reject' class='border-2 font-semibold hover:bg-red-700 hover:text-white 
+                rounded-full bg-red-500 text-white w-[6vw] h-[5vh] transition duration-300 ease-in-out' value='Rejected'>
+                    Rejected
                  </button>
-</td>
-"; // Example button in the "Decide" column
-                echo "</tr>";
-                echo "</form>";
+    
+                     <button name='Accept' class='ml-4 border-2 font-semibold hover:bg-green-700 hover:text-white 
+                        rounded-full bg-green-500 text-white w-[6vw] h-[5vh] transition duration-300 ease-in-out' value='Approved' >
+                          Approved
+                     </button>
+    </td>
+    "; // Example button in the "Decide" column
+                    echo "</tr>";
+                    echo "</form>";
+                }
             }
-        } else {
-            echo "<tr><td colspan='5'>Data is not fetched</td></tr>";
-        }
+            else{
+                echo "<tr><td colspan='5'>Data is not fetched</td></tr>";
+            }
+           
+        
         ?>
             </tbody>
         </table>
