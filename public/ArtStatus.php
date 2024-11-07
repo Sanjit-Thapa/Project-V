@@ -99,7 +99,7 @@
 
                         // Remarks (Text area for input)
                         echo "<td class='p-2 border border-slate-600'>
-                                <textarea name='Remarks' class='w-full h-16 border rounded-md p-1 text-sm' placeholder='Enter remarks...'>" . htmlspecialchars($row['Remarks']) . "</textarea>
+                                <textarea  name='Remarks' class='w-full h-16 border rounded-md p-1 text-sm' placeholder='Enter remarks...' require!>" . htmlspecialchars($row['Remarks']) . "</textarea>
                               </td>";
 
                         // Action buttons (Centered)
