@@ -6,7 +6,7 @@
     $sql = "SELECT Artist_Id, Username, Artistmail, ArtistPassword 
     FROM artistsignup_tb 
     WHERE Status = ? AND Artistmail = ?";
-$status = 'Approved';
+    $status = 'Approved';
 
 $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_bind_param($stmt, 'ss', $status, $Email);

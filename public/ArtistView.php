@@ -153,14 +153,14 @@ require "connection.php";
     <!-- Sidebar with Profile -->
     <div class="flex flex-col md:flex-row h-full">
         <!-- Sidebar Navigation -->
-        <nav class="bg-indigo-700 text-white w-full md:w-1/4 lg:w-1/5 p-5 flex flex-col items-center">
+        <nav class="bg-indigo-700 text-white w-full md:w-1/4 lg:w-1/5 p-5 flex flex-col items-center ">
             <div class="mb-6 text-center">
                 <!-- Profile Picture -->
                 <div class="w-24 h-24 rounded-full bg-gray-200 overflow-hidden mb-2">
                     <img src="<?php echo $ProfilePic; ?>" alt="Profile Picture" class="w-full h-full object-cover">
                 </div>
                 <!-- Username Display -->
-                <p class="text-lg font-semibold"><?php echo $username; ?></p>
+                <p class="text-2xl font-semibold text-orange-200"><?php echo $username; ?></p>
             </div>
             <ul class="space-y-4 text-center">
                 <li><a href="#upload" class="block hover:bg-indigo-500 p-3 rounded-lg">Upload Artwork</a></li>
