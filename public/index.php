@@ -20,7 +20,7 @@
            
         }
         elseif($page=='display'){
-            $pageinclude = "login.php";
+            $pageinclude = "Display.php";
         }
         elseif($page=='artist'){
             $pageinclude = "ArtistStatus.php";
