@@ -101,5 +101,40 @@ exit.addEventListener("click",(evt)=>{
    
 })
 
+//for changing the options of the other Display options
+
+function options() {
+    let ArtOptions = document.querySelector(".display i");
+  
+    let Banner = document.querySelector(".Banner");
+    
+    let down;
+    if (ArtOptions.classList.contains("fa-chevron-right")) {
+        ArtOptions.classList.remove("fa-chevron-right");
+        ArtOptions.classList.add("fa-chevron-down");
+
+        down =true;
+        
+    } else {
+        ArtOptions.classList.remove("fa-chevron-down");
+        ArtOptions.classList.add("fa-chevron-right");
+        
+        down = false;
+    }
+
+    if(down)
+    {
+    
+        Banner.classList.remove("hidden");
+        Banner.classList.add("visible");
+    }
+    else{
+        Banner.classList.remove("visible");
+        Banner.classList.add("hidden");
+    }
+
+
+}
+
 
 

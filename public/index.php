@@ -20,7 +20,7 @@
            
         }
         elseif($page=='display'){
-            $pageinclude = "Display.php";
+            $pageinclude = "Banner.php";
         }
         elseif($page=='artist'){
             $pageinclude = "ArtistStatus.php";
@@ -226,9 +226,14 @@
             </button></a> <label for="artist" class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="?page=artist">Artist</a></label>
             </div>
     
-            <div class="m-3 ">
+            <div class="display cursor-pointer hover:bg-orange-900 w-full" onclick="options()">
                 <a href="#"><button class="fa-solid fa-table-cells text-[1.8vw] text-white p-3 hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5"></button></a> 
-                <label for="Art" class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400  "><a href="?page=display">Display</a></label>
+                <label for="Art" class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400  ">Display</label>
+                <i class="fa-solid fa-chevron-right text-white pl-1 text-xl"></i>
+
+                <div class="Banner border-2 text-center hidden"> 
+                    <label for="BannerUpload" class="text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="?page=display">Banner</a></label> 
+                </div>
             </div>
              
             <div class="m-3">

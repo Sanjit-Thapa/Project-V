@@ -54,6 +54,10 @@
     }
 
 
+    
+
+
+
 ?> -->
 
 
@@ -68,11 +72,60 @@
 
 </head>
 <body >
+
+<div class="container mx-auto p-4">
+    <div class="overflow-x-auto">
+        <table class="w-full border-collapse bg-white shadow-md rounded-lg">
+            <thead>
+                <tr class="bg-indigo-600 text-white">
+                    <th class="px-6 py-3 text-left text-sm font-semibold">ID</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold">Banner Order</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold">Alt Img</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold">Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                    require "connection.php";
+
+                    $sqlSel = "SELECT * FROM Banner_tb"; // selection of the data
+                    $sqlStm = $conn->prepare($sqlSel);
+
+                    if ($sqlStm->execute()) {  
+                        $result = $sqlStm->get_result();
+
+                        if ($result) {
+                            while ($row = $result->fetch_assoc()) {
+                                $BId = $row['BannerId'];
+                                $BanOrder = $row['BannerOrder'];
+                                $BAlt = $row['Alt_Img'];
+                                $BImg = $row['BannerImg'];
+
+                                echo "<tr class='border-b hover:bg-gray-100'>";
+                                echo "<td class='px-6 py-4'>" . htmlspecialchars($BId) . "</td>";
+                                echo "<td class='px-6 py-4'>" . htmlspecialchars($BanOrder) . "</td>";
+                                echo "<td class='px-6 py-4'>" . htmlspecialchars($BAlt) . "</td>";
+                                echo "<td class='px-6 py-4'><img src='" . htmlspecialchars($BImg) . "' alt='" . htmlspecialchars($BAlt) . "' class='w-24 h-auto rounded-md'></td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='4' class='px-6 py-4 text-center text-gray-500'>No data found.</td></tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='4' class='px-6 py-4 text-center text-red-500'>Error executing query.</td></tr>";
+                    }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
     
 
-<div class="bg-white p-8 rounded-lg shadow-xl w-96 max-w-full">
+<div class="bg-white p-8 rounded-lg shadow-xl w-96 max-w-full hidden">
     <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Upload Banner Images</h2>
-    <form action="Display.php" method="POST" enctype="multipart/form-data">
+    <form action="Banner.php" method="POST" enctype="multipart/form-data">
         <div class="space-y-5">
             <!-- File Input -->
             <div class="flex items-center justify-center w-full">
