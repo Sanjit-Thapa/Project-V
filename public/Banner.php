@@ -3,7 +3,7 @@
 
     //uploading the image in the banner
 
-    if(isset($_POST['submit']))
+    if(isset($_POST['Upload']))
     {
         $Order = $_POST['order'];
         $Alt = $_POST['altText'];
@@ -54,6 +54,33 @@
     }
 
 
+  //for Deleting the bannerimage from the display as well as from the database
+    if(isset($_POST['Delete']))
+    {
+      echo "hello";
+          $sqlRem = "DELETE FROM banner_tb WHERE BannerID = ? ";
+          $banId = $_POST['edId'];
+          $stmt = $conn->prepare($sqlRem);
+
+          //binding the statement 
+
+          $stmt->bind_param('i',$banId);
+
+          if($stmt->execute()===true)
+          {
+              echo "the banner image is deleted succesfully";
+          }
+          else{
+              echo "something is wrong";
+          }
+          
+      }
+      else{
+          echo "The button is not pressed";
+      }
+
+
+    
     
 
 
@@ -89,6 +116,7 @@
                 <?php 
                     require "connection.php";
 
+
                     $sqlSel = "SELECT * FROM Banner_tb"; // selection of the data
                     $sqlStm = $conn->prepare($sqlSel);
 
@@ -102,26 +130,57 @@
                                 $BAlt = $row['Alt_Img'];
                                 $BImg = $row['BannerImg'];
 
+                                //operation to perform if this two buttons are pressed
                                 echo "<tr class='border-b hover:bg-gray-100'>";
-                                echo "<td class='px-6 py-4'>" . htmlspecialchars($BId) . "</td>";
+
+                                echo "<td class='px-6 py-4'>
+                                        <input type='text' name='edId' class='border-0 bg-transparent text-black cursor-default' 
+                                        value='" . htmlspecialchars($BId) . "' readonly tabindex='-1' 
+                                        style='width: 50px; pointer-events: none;' />
+                                      </td>";
                                 echo "<td class='px-6 py-4'>" . htmlspecialchars($BanOrder) . "</td>";
                                 echo "<td class='px-6 py-4'>" . htmlspecialchars($BAlt) . "</td>";
-                                echo "<td class='px-6 py-4'><img src='" . htmlspecialchars($BImg) . "' alt='" . htmlspecialchars($BAlt) . "' class='w-24 h-auto rounded-md'></td>";
-
-                                echo  "<td class='px-6 py-4'>" . "<button class='bg-blue-600 text-black'>Edit</button> " . "</td>";
+                                echo "<td class='px-6 py-4'>
+                                        <img src='" . htmlspecialchars($BImg) . "' alt='" . htmlspecialchars($BAlt) . "' 
+                                        class='w-24 h-auto rounded-md'>
+                                      </td>";
+                                
+                                echo "<td class='px-6 py-4 space-x-2'>";
+                                    // Edit button form
+                                    echo "<form action='Banner.php' method='post' style='display:inline;'>
+                                            <input type='hidden' name='edId' value='" . htmlspecialchars($BId) . "' />
+                                            <button type='submit' name='Edit' class='bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600'>
+                                                <i class='fa-solid fa-pen-to-square'></i> Edit
+                                            </button>
+                                          </form>";
+                                    
+                                    // Remove button form
+                                    echo "<form action='Banner.php' method='post' style='display:inline;'>
+                                            <input type='hidden' name='edId' value='" . htmlspecialchars($BId) . "' />
+                                            <button type='submit' name='Delete' class='bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600'>
+                                                <i class='fa-solid fa-trash'></i> Remove
+                                            </button>
+                                          </form>";
+                                echo "</td>";
+                                
                                 echo "</tr>";
                             }
                         } else {
-                            echo "<tr><td colspan='4' class='px-6 py-4 text-center text-gray-500'>No data found.</td></tr>";
+                            echo "<tr><td colspan='5' class='px-6 py-4 text-center text-gray-500'>No data found.</td></tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='4' class='px-6 py-4 text-center text-red-500'>Error executing query.</td></tr>";
+                        echo "<tr><td colspan='5' class='px-6 py-4 text-center text-red-500'>Error executing query.</td></tr>";
                     }
+
+
+
+               
                 ?>
             </tbody>
         </table>
     </div>
 </div>
+
 
 <!-- To present with the option to open up the image upload -->
 <div class="border-2 h-[14vh] flex justify-center items-center">
@@ -161,7 +220,7 @@
 
                 <!-- Submit Button -->
                 <div class="flex justify-center">
-                    <button type="submit" class="w-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white py-2 rounded-lg text-sm font-semibold shadow-md hover:from-indigo-600 hover:to-indigo-700 transition duration-200" name="submit">Submit</button>
+                    <button type="submit" name="Upload" class="w-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white py-2 rounded-lg text-sm font-semibold shadow-md hover:from-indigo-600 hover:to-indigo-700 transition duration-200" name="submit">Submit</button>
                 </div>
             </div>
         </form>
