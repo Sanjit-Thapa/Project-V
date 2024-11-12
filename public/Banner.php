@@ -82,6 +82,7 @@
                     <th class="px-6 py-3 text-left text-sm font-semibold">Banner Order</th>
                     <th class="px-6 py-3 text-left text-sm font-semibold">Alt Img</th>
                     <th class="px-6 py-3 text-left text-sm font-semibold">Image</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold">Operation</th>
                 </tr>
             </thead>
             <tbody>
@@ -106,6 +107,8 @@
                                 echo "<td class='px-6 py-4'>" . htmlspecialchars($BanOrder) . "</td>";
                                 echo "<td class='px-6 py-4'>" . htmlspecialchars($BAlt) . "</td>";
                                 echo "<td class='px-6 py-4'><img src='" . htmlspecialchars($BImg) . "' alt='" . htmlspecialchars($BAlt) . "' class='w-24 h-auto rounded-md'></td>";
+
+                                echo  "<td class='px-6 py-4'>" . "<button class='bg-blue-600 text-black'>Edit</button> " . "</td>";
                                 echo "</tr>";
                             }
                         } else {
@@ -120,40 +123,49 @@
     </div>
 </div>
 
+<!-- To present with the option to open up the image upload -->
+<div class="border-2 h-[14vh] flex justify-center items-center">
+    <div>
+         <button class="border-2 border-blue-600 mx-auto p-3 font-semibold bg-blue-600 text-white rounded-md hover:border-[#1B03A3] focus:ring-2 ring-green-400  hover:scale-105 transition ease-in-out delay-400 " id="upload">Upload Banner Images</button>
+    </div>
+
+</div>
 
     
 
-<div class="bg-white p-8 rounded-lg shadow-xl w-96 max-w-full hidden">
-    <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Upload Banner Images</h2>
-    <form action="Banner.php" method="POST" enctype="multipart/form-data">
-        <div class="space-y-5">
-            <!-- File Input -->
-            <div class="flex items-center justify-center w-full">
-                <label class="w-full flex items-center justify-center px-4 py-3 text-black rounded-lg shadow-lg tracking-wide uppercase border border-indigo-300 cursor-pointer bg-indigo-100 hover:bg-indigo-200">
-                 <i class="fa-solid fa-image mr-2"></i>
-                <span class="text-base font-medium">Upload Image</span>
-                <input type="file" name="bannerImg" accept="image/*" class="hidden" id="bannerImg" multiple onchange="check()" />
-                 </label>
-            </div>
+<div class="UploadOption fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-8 rounded-lg shadow-xl w-96 max-w-full">
+        <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Upload Banner Images</h2>
+        <form action="Banner.php" method="POST" enctype="multipart/form-data">
+            <div class="space-y-5">
+                <!-- File Input -->
+                <div class="flex items-center justify-center w-full">
+                    <label class="w-full flex items-center justify-center px-4 py-3 text-black rounded-lg shadow-lg tracking-wide uppercase border border-indigo-300 cursor-pointer bg-indigo-100 hover:bg-indigo-200">
+                        <i class="fa-solid fa-image mr-2"></i>
+                        <span class="text-base font-medium">Upload Image</span>
+                        <input type="file" name="bannerImg" accept="image/*" class="hidden" id="bannerImg" multiple onchange="check()" />
+                    </label>
+                </div>
 
-            <!-- Order Input -->
-            <div>
-                <label for="order" class="text-gray-700 text-sm font-medium">Display Order</label>
-                <input type="number" name="order" min="1" placeholder="Order" class="mt-2 w-full px-4 py-2 text-sm border rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-gray-500" required />
-            </div>
+                <!-- Order Input -->
+                <div>
+                    <label for="order" class="text-gray-700 text-sm font-medium">Display Order</label>
+                    <input type="number" name="order" min="1" placeholder="Order" class="mt-2 w-full px-4 py-2 text-sm border rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-gray-500" required />
+                </div>
 
-            <!-- Alt Text Input -->
-            <div>
-                <label for="altText" class="text-gray-700 text-sm font-medium">Alt Text</label>
-                <input type="text" name="altText" placeholder="Alt text for image" class="mt-2 w-full px-4 py-2 text-sm border rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-gray-500" required />
-            </div>
+                <!-- Alt Text Input -->
+                <div>
+                    <label for="altText" class="text-gray-700 text-sm font-medium">Alt Text</label>
+                    <input type="text" name="altText" placeholder="Alt text for image" class="mt-2 w-full px-4 py-2 text-sm border rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-gray-500" required />
+                </div>
 
-            <!-- Submit Button -->
-            <div class="flex justify-center">
-                <button type="submit" class="w-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white py-2 rounded-lg text-sm font-semibold shadow-md hover:from-indigo-600 hover:to-indigo-700 transition duration-200" name="submit" >Submit</button>
+                <!-- Submit Button -->
+                <div class="flex justify-center">
+                    <button type="submit" class="w-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white py-2 rounded-lg text-sm font-semibold shadow-md hover:from-indigo-600 hover:to-indigo-700 transition duration-200" name="submit">Submit</button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 
 
@@ -182,16 +194,33 @@
                 fileInput.value = "";
              }
 
-            // Set the required dimensions
-            // const requiredWidth = /[1000-1600]/;
-            // const requiredHeight = /[600-900]/;
-
-            // if (width !== requiredWidth || height !== requiredHeight) {
-            //     alert(`Image must be ${requiredWidth}x${requiredHeight} pixels.`);
-            //     fileInput.value = ""; // Clear the input
-            // }
+       
         };
     }
+
+    //to make the visible of the hidden 
+
+    let uploadBanner = document.getElementById("upload");
+
+    uploadBanner.addEventListener("click",()=>{
+        let uploadOption =document.querySelector(".UploadOption");
+        if(uploadOption.classList.contains("hidden"))
+        {
+            uploadOption.classList.remove("hidden");
+            uploadOption.classList.add("visible");
+        }
+        else{
+            uploadOption.classList.remove("visible");
+            uploadOption.classList.add("hidden");
+        }
+
+        window.addEventListener('click',(e)=>{
+            if(e.target===uploadOption)
+        {
+            uploadOption.classList.add("hidden");
+        }
+        })
+    })
 
 </script>
 </body>
