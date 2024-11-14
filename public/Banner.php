@@ -1,11 +1,11 @@
-<!-- <?php 
+ <?php 
     require "connection.php";
 
     //uploading the image in the banner
 
     if(isset($_POST['Upload']))
     {
-        $Order = $_POST['order'];
+        
         $Alt = $_POST['altText'];
 
         if($_FILES['bannerImg'])
@@ -21,7 +21,7 @@
                     //getting the input data from each of the field
 
 
-                    $sqlBan = "Insert into banner_tb (BannerImg,BannerOrder,Alt_Img) values (?, ?, ?)";//insertion into the db
+                    $sqlBan = "Insert into banner_tb (BannerImg,Alt_Img) values (?, ?)";//insertion into the db
 
                     //preparing the statment
 
@@ -29,7 +29,7 @@
 
                     // binding the statements
 
-                    $stm->bind_param('sis',$filedest,$Order,$Alt);
+                    $stm->bind_param('ss',$filedest,$Alt);
 
                     if($stm->execute()===true)
                     {
@@ -57,7 +57,6 @@
   //for Deleting the bannerimage from the display as well as from the database
     if(isset($_POST['Delete']))
     {
-      echo "hello";
           $sqlRem = "DELETE FROM banner_tb WHERE BannerID = ? ";
           $banId = $_POST['edId'];
           $stmt = $conn->prepare($sqlRem);
@@ -79,13 +78,16 @@
           echo "The button is not pressed";
       }
 
+      //To allow the editing of the Banner Images
+      if(isset($_POST['Edit']))
+      {
+        
+        $sqlEd = "select ";
+      }
 
-    
-    
 
 
-
-?> -->
+?> 
 
 
 <!DOCTYPE html>
@@ -106,7 +108,7 @@
             <thead>
                 <tr class="bg-indigo-600 text-white">
                     <th class="px-6 py-3 text-left text-sm font-semibold">ID</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold">Banner Order</th>
+                    <!-- <th class="px-6 py-3 text-left text-sm font-semibold">Banner Order</th> -->
                     <th class="px-6 py-3 text-left text-sm font-semibold">Alt Img</th>
                     <th class="px-6 py-3 text-left text-sm font-semibold">Image</th>
                     <th class="px-6 py-3 text-left text-sm font-semibold">Operation</th>
@@ -126,7 +128,7 @@
                         if ($result) {
                             while ($row = $result->fetch_assoc()) {
                                 $BId = $row['BannerId'];
-                                $BanOrder = $row['BannerOrder'];
+                                // $BanOrder = $row['BannerOrder'];
                                 $BAlt = $row['Alt_Img'];
                                 $BImg = $row['BannerImg'];
 
@@ -138,7 +140,7 @@
                                         value='" . htmlspecialchars($BId) . "' readonly tabindex='-1' 
                                         style='width: 50px; pointer-events: none;' />
                                       </td>";
-                                echo "<td class='px-6 py-4'>" . htmlspecialchars($BanOrder) . "</td>";
+                                // echo "<td class='px-6 py-4'>" . htmlspecialchars($BanOrder) . "</td>";
                                 echo "<td class='px-6 py-4'>" . htmlspecialchars($BAlt) . "</td>";
                                 echo "<td class='px-6 py-4'>
                                         <img src='" . htmlspecialchars($BImg) . "' alt='" . htmlspecialchars($BAlt) . "' 
@@ -146,13 +148,14 @@
                                       </td>";
                                 
                                 echo "<td class='px-6 py-4 space-x-2'>";
-                                    // Edit button form
-                                    echo "<form action='Banner.php' method='post' style='display:inline;'>
-                                            <input type='hidden' name='edId' value='" . htmlspecialchars($BId) . "' />
-                                            <button type='submit' name='Edit' class='bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600'>
-                                                <i class='fa-solid fa-pen-to-square'></i> Edit
-                                            </button>
-                                          </form>";
+                                
+                               // Edit button form
+                               echo "<form action='Banner.php' method='post' style='display:inline;'>
+                               <input type='hidden' name='edId' value='" . htmlspecialchars($BId) . "' />
+                               <button type='submit' name='Edit' class='bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600'>
+                                   <i class='fa-solid fa-pen-to-square'></i> Edit
+                               </button>
+                             </form>";
                                     
                                     // Remove button form
                                     echo "<form action='Banner.php' method='post' style='display:inline;'>
@@ -207,10 +210,10 @@
                 </div>
 
                 <!-- Order Input -->
-                <div>
+                <!-- <div>
                     <label for="order" class="text-gray-700 text-sm font-medium">Display Order</label>
                     <input type="number" name="order" min="1" placeholder="Order" class="mt-2 w-full px-4 py-2 text-sm border rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-gray-500" required />
-                </div>
+                </div> -->
 
                 <!-- Alt Text Input -->
                 <div>
@@ -226,6 +229,8 @@
         </form>
     </div>
 </div>
+
+
 
 
 <script>
@@ -260,26 +265,27 @@
     //to make the visible of the hidden 
 
     let uploadBanner = document.getElementById("upload");
+let uploadOption = document.querySelector(".UploadOption");
 
-    uploadBanner.addEventListener("click",()=>{
-        let uploadOption =document.querySelector(".UploadOption");
-        if(uploadOption.classList.contains("hidden"))
-        {
-            uploadOption.classList.remove("hidden");
-            uploadOption.classList.add("visible");
-        }
-        else{
-            uploadOption.classList.remove("visible");
-            uploadOption.classList.add("hidden");
-        }
+uploadBanner.addEventListener("click", () => {
+    // Toggle visibility of uploadOption when uploadBanner is clicked
+    if (uploadOption.classList.contains("hidden")) {
+        uploadOption.classList.remove("hidden");
+        uploadOption.classList.add("visible");
+    } else {
+        uploadOption.classList.remove("visible");
+        uploadOption.classList.add("hidden");
+    }
+});
 
-        window.addEventListener('click',(e)=>{
-            if(e.target===uploadOption)
-        {
-            uploadOption.classList.add("hidden");
-        }
-        })
-    })
+// Add click listener to the window only once
+window.addEventListener('click', (e) => {
+    
+    if (e.target === uploadOption) {
+        uploadOption.classList.add("hidden");
+    }
+});
+
 
 </script>
 </body>
