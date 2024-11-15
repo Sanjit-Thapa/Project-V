@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
-<body class="bg-[#3D3028] text-[#F1EDE4] font-sans overflow-x-hidden">
+<body class=" text-[#F1EDE4] font-sans overflow-x-hidden">
 
     <!-- Navigation Bar -->
     <nav class="container mx-auto flex items-center justify-between py-4 px-4 md:px-6 absolute top-0 left-0 right-0 z-20 backdrop-blur-md  text-[#3a061f] bg-white">
@@ -16,7 +16,7 @@
             <a href="#homesection"><img src="Assets/art-gallery-logo-.png" alt="Art Gallery Logo" class="w-16 md:w-20"></a>
         </div>
         <ul class="hidden mx-auto md:flex space-x-4 lg:space-x-8 text-base md:text-lg font-semibold gap-4 md:gap-6">
-            <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="#">About Us</a></li>
+            <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="#About">About Us</a></li>
             <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="#">Exhibitions</a></li>
             <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="#">Art Gallery</a></li>
             <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="ArtistLogin.php">Artist</a></li>
@@ -54,29 +54,49 @@
     </section>
 
     <!-- About Us section -->
-    <section class="border-2 overflow-hidden bg-white border-red-400 absolute w-full flex justify-center py-10">
+    <section class=" overflow-hidden bg-[#e8c67d5b] border-red-400 absolute" id="About">
     <!-- Quote Section -->
-    <div class="container w-[70vw] border-2 border-red-900 text-center space-y-4 relative mx-auto p-5 h-full">
-        <div class="inside h-full w-[80%] mx-auto  border-[#3a061f] p-8 bg-[#F9F7F4] ">
-            <!-- Title -->
-            <h1 class="text-[2vw] pt-4 text-[#3a061f] font-[rubik]">Art Gallery</h1>
+   
+    <div class="container border-red-900 text-center space-y-4 relative mx-auto  h-full w-screen px-[2vw]">
+       <div class="inside px-9 py-8 w-[90vw] h-full  mx-auto">
+       <?php
+            require "connection.php";
 
-            <!-- Quote -->
-            <h2 class="text-[3vw] text-[#3a061f] font-[rubik]  p-4">
-                "Where every masterpiece tells a story and every visit sparks inspiration"
-            </h2>
+            //selection of the statement
 
-            <!-- Description -->
-            <p class="text-[#3a061f] text-[1rem] leading-7">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum obcaecati dolorem, in doloremque consequuntur autem mollitia aliquid perferendis illo corporis sit et molestiae, adipisci voluptate eaque assumenda at deleniti architecto.
-                Facilis tempora perferendis voluptates vero.
-                Iste eveniet aut deleniti unde laboriosam inventore, laudantium consequatur voluptatem odit culpa, expedita sed reprehenderit, ipsum corporis.
-                Lis tempora perferendis voluptates vero.
-                Iste eveniet aut deleniti unde laboriosam inventore, laudantium consequatur voluptatem odit culpa, expedita sed reprehenderit, ipsum corporis.
-            </p>
-        </div>
+            $sqlSel = "select Heading,Quote,Paragraph from aboutus_tb";
+
+            //preparing the statement
+            $stmt = $conn->prepare($sqlSel);
+
+            //execution of the query
+
+            if($stmt->execute())
+            {
+                $result = $stmt->get_result();
+                while($row = $result->fetch_assoc())
+                {
+
+            echo "<h1 class='text-[2vw] pt-4 text-[#35282e] font-[rubik]'>{$row['Heading']}</h1>";
+
+            echo "<h2 class='text-[3vw] text-[#3a061f] font-[rubik] p-4'>
+                {$row['Quote']}
+                 </h2>";
+
+            echo "<p class='text-[#3a061f] text-[1.1rem] text-center leading-8'>
+                {$row['Paragraph']}
+                 </p>";
+                }
+            }
+        ?>
+
+
+           
+       </div>
+       
     </div>
 </section>
+
 
 
     

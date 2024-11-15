@@ -19,8 +19,11 @@
            $pageinclude =  "setting.php";
            
         }
-        elseif($page=='display'){
+        elseif($page=='banner'){
             $pageinclude = "Banner.php";
+        }
+        elseif($page=='about'){
+            $pageinclude ="AboutUS.php";
         }
         elseif($page=='artist'){
             $pageinclude = "ArtistStatus.php";
@@ -199,14 +202,11 @@
                 <div class="m-3">
                    <a href="https://www.facebook.com"> <button class="fa-solid fa-chart-simple text-[1.8vw] text-white p-3  hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5">
                   </button></a> <label for="dashboard" class= "label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400" ><a href="#">Dashboard</a></label>
-                </div>
+            </div>
 
-                <div class="m-3">
+            <div class="m-3">
                   <a href="#"><button class="fa-solid fa-clock text-[1.8vw] text-white p-3 hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5"></button></a>
-           
-            
                   <label for="status" class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400"><a href="?page=status">Art Status</a></label>
-    
             </div>
              
             <div class="m-3">
@@ -231,9 +231,15 @@
                 <label for="Art" class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400  ">Display</label>
                 <i class="fa-solid fa-chevron-right text-white pl-1 text-xl"></i>
 
-                <div class="Banner border-2 text-center hidden"> 
-                    <label for="BannerUpload" class="text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="?page=display">Banner</a></label> 
+                <div class="Banner hidden">
+                         <div class=" border-2 text-center "> 
+                            <label for="BannerUpload" class="text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="?page=banner">Banner</a></label> 
+                         </div>
+                         <div class=" border-2 text-center "> 
+                            <label for="AboutUs" class="text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="?page=about">About Us</a></label> 
+                        </div>
                 </div>
+              
             </div>
              
             <div class="m-3">
