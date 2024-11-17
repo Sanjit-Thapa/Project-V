@@ -149,13 +149,13 @@
                                 
                                 echo "<td class='px-6 py-4 space-x-2'>";
                                 
-                               // Edit button form
-                               echo "<form action='Banner.php' method='post' style='display:inline;'>
-                               <input type='hidden' name='edId' value='" . htmlspecialchars($BId) . "' />
-                               <button type='submit' name='Edit' class='bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600'>
-                                   <i class='fa-solid fa-pen-to-square'></i> Edit
-                               </button>
-                             </form>";
+                            //    // Edit button form
+                            //    echo "<form action='Banner.php' method='post' style='display:inline;'>
+                            //    <input type='hidden' name='edId' value='" . htmlspecialchars($BId) . "' />
+                            //    <button type='submit' name='Edit' class='bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600'>
+                            //        <i class='fa-solid fa-pen-to-square'></i> Edit
+                            //    </button>
+                            //  </form>";
                                     
                                     // Remove button form
                                     echo "<form action='Banner.php' method='post' style='display:inline;'>
@@ -265,7 +265,7 @@
     //to make the visible of the hidden 
 
     let uploadBanner = document.getElementById("upload");
-let uploadOption = document.querySelector(".UploadOption");
+    let uploadOption = document.querySelector(".UploadOption");
 
 uploadBanner.addEventListener("click", () => {
     // Toggle visibility of uploadOption when uploadBanner is clicked

@@ -19,8 +19,8 @@
             <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="#About">About Us</a></li>
             <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="#">Exhibitions</a></li>
             <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="#">Art Gallery</a></li>
-            <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="ArtistLogin.php">Artist</a></li>
-            <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="login.php">Admin</a></li>
+            <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="ArtistLogin.php"target="_blank">Artist</a></li>
+            <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="login.php" target="_blank">Admin</a></li>
         </ul>
     </nav>
 
@@ -54,8 +54,11 @@
     </section>
 
     <!-- About Us section -->
-    <section class=" overflow-hidden bg-[#e8c67d5b] border-red-400 absolute" id="About">
+    <section class=" relative overflow-hidden bg-[#e8c67d5b] border-red-400 w-screen" id="About">
     <!-- Quote Section -->
+     <div class="bg-[url('./Assets/Floral.png')] absolute top-0 inset-0 w-full h-12 md:h-24 bg-contain bg-repeat-x opacity-30 -z-20 mix-blend-darken ">
+       
+     </div>
    
     <div class="container border-red-900 text-center space-y-4 relative mx-auto  h-full w-screen px-[2vw]">
        <div class="inside px-9 py-8 w-[90vw] h-full  mx-auto">
@@ -90,19 +93,68 @@
             }
         ?>
 
+    </div>
+    </div>
 
-           
-       </div>
-       
+       <!-- make the bouncy view Gallery ball bouncing -->
+       <div class="flex justify-center  items-center mx-auto ">
+            <div class="bouncyArt border-2 border-[#767618] w-32 h-20 text-center flex items-center justify-center rounded-lg cursor-pointer hover:scale-100 transition ease-in-out"  >
+                <h5 class="font-[rubik] text-xl text-black font-light">View Gallery</h5>
+            </div>
+        </div>
+
+    <div class="bg-[url('./Assets/Floral.png')] inset-0 w-full h-12 md:h-24 bg-contain bg-repeat-x opacity-30 -z-20 mix-blend-darken ">
+               
+    </div>
+
+
+</section>
+
+<!-- Now Product section -->
+
+<section class="border-2">
+    <div class="pl-8 pt-10">
+        <h2 class="text-[56px] leading-[1.0714285714] font-semibold tracking-[-0.005em] font-[rubik] text-[#3a061f]">
+            Explore The Best
+        </h2>
+    </div>
+
+    <!-- Products Section -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 border-2 border-green-200 p-4">
+        <!-- Product Card -->
+        <div class="flex flex-col items-center  border-2 p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105">
+            <img src="Assets/Floral.png" alt="Product Image" 
+                 class="w-full h-auto max-h-[200px] object-contain mb-6 rounded-md shadow-md transition-all duration-300 ease-in-out">
+            
+            <div class="w-full text-center p-4  rounded-md shadow-sm">
+                <h4 class="text-xl font-semibold text-[#3a061f] mb-2">Picture Title</h4>
+                <h2 class="text-black text-sm mt-2 font-light">Hello, this is a longer text to test resizing!</h2>
+            </div>
+            
+            <!-- Optional: Add a "View More" button or price tag below -->
+            <button class="mt-4 px-6 py-2 text-white bg-[#3a061f] rounded-full text-sm font-semibold hover:bg-[#5f2a4e] transition duration-300">Enquire </button>
+        </div>
+        
     </div>
 </section>
 
 
 
     
+</section>
+
+
+        <!-- Second Product -->
+        <!-- <div class="w-[20vw] border-green-800 border-2">
+            <img src="Assets/imgDII.jpg" alt="Another Product" 
+                 class="w-full h-auto object-contain">
+        </div> -->
 
     <!-- Swiper JS -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
     <script>
       const swiper = new Swiper('.panorama-slider', {
         loop: true,
@@ -121,6 +173,10 @@
             prevEl: '.swiper-button-prev',
         },
     });
+
+ 
+
+  
     </script>
 </body>
 </html>
