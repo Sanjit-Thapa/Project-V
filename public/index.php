@@ -33,6 +33,11 @@
         $pageinclude = "Artstatus.php";
         
     }  
+    elseif($page=='list')
+    {
+        $pageinclude = "ArtSelect.php";
+        
+    }  
   }
    else{
     $pageinclude = "ad.php";
@@ -237,6 +242,9 @@
                          </div>
                          <div class=" border-2 text-center "> 
                             <label for="AboutUs" class="text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="?page=about">About Us</a></label> 
+                        </div>
+                        <div class=" border-2 text-center "> 
+                            <label for="AboutUs" class="text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="?page=list">Art List</a></label> 
                         </div>
                 </div>
               
