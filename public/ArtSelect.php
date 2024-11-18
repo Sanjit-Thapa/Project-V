@@ -1,3 +1,38 @@
+<?php
+    require "connection.php";
+
+    //updation of the Listed sites 
+
+    if(isset($_POST['Yes'])||isset($_POST['No']))
+    {
+        $id = $_POST['Artid'];
+        $listed = $_POST['Yes']?$_POST['Yes']:$_POST['No'];
+
+        //updation of the Listed
+        $sqlUpd = "UPDATE artistview_tb
+        SET Listed = ? WHERE ArtId = ?";
+    
+        //preparing the statement
+       $stm = $conn->prepare($sqlUpd);
+
+       //binding the parameter
+       $stm->bind_param('si',$listed,$id);
+
+       //execution of the querry
+       if($stm->execute()===true)
+       {
+        echo "Updation successfull";
+       }
+       else{
+        echo "Updation is not successfull";
+       }
+
+    }
+    else{
+        echo "The Action button is not pressed";
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +44,7 @@
 <body>
     
 <div class="text-center">
-    <h1 class="text-slate-800 font-semibold text-[1rem] mb-2">Art Status</h1>
+    <h1 class="text-slate-800 font-semibold text-[1rem] mb-2">Art Selection</h1>
     <div class="overflow-x-auto">
         <table class="w-full max-w-full mx-auto border-collapse border rounded-lg overflow-hidden shadow-lg">
             <thead>
@@ -43,9 +78,9 @@
 
                 if ($stm->execute()) {
                     $result = $stm->get_result();
-                    
+
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<form action='Artstatus.php' method='POST'>";
+                        echo "<form action='ArtSelect.php' method='POST'>";
                         echo "<tr class='border-b hover:bg-gray-100'>";
 
                         // ArtId
@@ -81,9 +116,9 @@
 
                         // Action buttons (Centered)
                         echo "<td class=' text-center space-x-2 border border-slate-600 '>
-                                <button type='submit' name='Reject' value='No' class='px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition mb-2'>No</button>
+                                <button type='submit' name='No' value='No' class='px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition mb-2'>No</button>
                                 
-                                <button type='submit' name='Yes' value='Approved' class='px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition'>Yes</button>
+                                <button type='submit' name='Yes' value='Yes' class='px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition'>Yes</button>
                               </td>";
 
                         echo "</tr>";

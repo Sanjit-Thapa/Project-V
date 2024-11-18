@@ -120,25 +120,50 @@
     </div>
 
     <!-- Products Section -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 border-2 border-green-200 p-4">
-        <!-- Product Card -->
-        <div class="flex flex-col items-center  border-2 p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105">
-            <img src="Assets/Floral.png" alt="Product Image" 
-                 class="w-full h-auto max-h-[200px] object-contain mb-6 rounded-md shadow-md transition-all duration-300 ease-in-out">
-            
-            <div class="w-full text-center p-4  rounded-md shadow-sm">
-                <h4 class="text-xl font-semibold text-[#3a061f] mb-2">Picture Title</h4>
-                <h2 class="text-black text-sm mt-2 font-light">Hello, this is a longer text to test resizing!</h2>
-            </div>
-            
-            <!-- Optional: Add a "View More" button or price tag below -->
-             <div>
-                <button class="mt-4 px-6 py-2 text-white bg-[#3a061f] rounded-full text-[0.95rem] font-semibold hover:bg-[#5f2a4e] transition duration-300">Enquire </button>
-                <button class="mt-4 px-6 py-2 text-white bg-[#082c1e] rounded-full text-[0.95rem]  font-semibold hover:bg-[#202460] transition duration-300">Reserve </button>
-             </div>
-           
-        </div>
+   
+        <?php 
+            require "connection.php";
         
+            //selection of the product that was approved to be listed on the site
+
+            $sql = "select * from artistview_tb where Listed = 'Yes' ";
+
+            //execution of the querry
+
+           $result =  $conn->query($sql);
+           if ($result) {
+            echo '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 border-2 border-green-200 p-4">';
+            
+            while ($row = mysqli_fetch_assoc($result)) {
+                // Product Card
+                echo '<div class="flex flex-col items-center border-2 p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105">';
+        
+                echo '<img src="' . $row['ImgPath'] . '" alt="Product Image" 
+                      class="w-full h-auto max-h-[200px] object-contain mb-6 rounded-md shadow-md transition-all duration-300 ease-in-out">';
+        
+                echo '<div class="see w-full text-center p-4 rounded-md shadow-sm cursor-pointer">
+                        <h4 class="text-[1rem] font-semibold text-[#3a061f] mb-2 truncate seeMore">' . $row['ArtTitle'] . '</h4>
+                        <h4 class="text-[1rem] font-semibold text-[#3a061f] mb-2 truncate seeMore">' . $row['ArtForm'] . '</h4>
+                        <h2 class="text-black text-sm text-left mt-2 font-light truncate seeMore">' . $row['Description'] . '</h2>
+                      </div>';
+        
+                echo '<div>
+                        <button class="mt-4 px-6 py-2 text-white bg-[#3a061f] rounded-full text-[0.95rem] font-semibold hover:bg-[#5f2a4e] transition duration-300">Enquire</button>
+                        <button class="mt-4 px-6 py-2 text-white bg-[#082c1e] rounded-full text-[0.95rem] font-semibold hover:bg-[#202460] transition duration-300">Reserve</button>
+                      </div>';
+                echo '</div>';
+            }
+        
+            echo '</div>'; // Close the grid container
+        }
+        
+
+
+    
+        ?>
+       
+    
+      
     </div>
 </section>    
 </section>
@@ -169,7 +194,26 @@
         },
     });
 
- 
+    //see more option for the longer text
+
+    let seeMore = document.getElementsByClassName("seeMore");
+    let container = document.querySelector(".see");
+    container.addEventListener("click",(e)=>{
+        for(let i=0 ;i<seeMore.length;i++)
+    {
+        if(seeMore[i].classList.contains("truncate"))
+    {
+        seeMore[i].classList.remove("truncate");
+        seeMore[i].classList.add("break-words");
+    }
+   else{
+        seeMore[i].classList.remove("break-words");
+        seeMore[i].classList.add("truncate");
+    }
+    }
+    
+    })
+  
 
   
     </script>
