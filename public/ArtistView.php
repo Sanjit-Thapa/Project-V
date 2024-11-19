@@ -153,7 +153,7 @@ require "connection.php";
     <!-- Sidebar with Profile -->
     <div class="flex flex-col md:flex-row h-full">
         <!-- Sidebar Navigation -->
-        <nav class="bg-indigo-700 text-white w-full md:w-1/4 lg:w-1/5 p-5 flex flex-col items-center ">
+        <nav class="bg-indigo-700 text-white w-full h-screen md:w-1/4 lg:w-1/5 p-5 flex flex-col items-center ">
             <div class="mb-6 text-center">
                 <!-- Profile Picture -->
                 <div class="w-24 h-24 rounded-full bg-gray-200 overflow-hidden mb-2">

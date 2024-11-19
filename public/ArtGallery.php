@@ -136,8 +136,10 @@
             
             while ($row = mysqli_fetch_assoc($result)) {
                 // Product Card
+                
+
                 echo '<div class="flex flex-col items-center border-2 p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105">';
-        
+
                 echo '<img src="' . $row['ImgPath'] . '" alt="Product Image" 
                       class="w-full h-auto max-h-[200px] object-contain mb-6 rounded-md shadow-md transition-all duration-300 ease-in-out">';
         
@@ -147,10 +149,17 @@
                         <h2 class="text-black text-sm text-left mt-2 font-light truncate seeMore">' . $row['Description'] . '</h2>
                       </div>';
         
-                echo '<div>
-                        <button class="mt-4 px-6 py-2 text-white bg-[#3a061f] rounded-full text-[0.95rem] font-semibold hover:bg-[#5f2a4e] transition duration-300">Enquire</button>
-                        <button class="mt-4 px-6 py-2 text-white bg-[#082c1e] rounded-full text-[0.95rem] font-semibold hover:bg-[#202460] transition duration-300">Reserve</button>
-                      </div>';
+                      echo '<div class="flex gap-2">
+                      <button class="mt-4 px-6 py-2 text-white bg-[#3a061f] rounded-full text-[0.95rem] font-semibold hover:bg-[#5f2a4e] transition duration-300" onclick="seeMore() pr-1">See more</button>
+                      
+                      <form action="ReserveForm.php" method="post">
+                          <input type="number" name="Artid" value="' . $row['ArtId'] . '" readonly 
+                              class="hidden">
+                          
+                          <button type="submit" class="mt-4 px-6 py-2 text-white bg-[#082c1e] rounded-full text-[0.95rem] font-semibold hover:bg-[#202460] transition duration-300" name="Reserve">Reserve</button>
+                      </form>
+                    </div>';
+              
                 echo '</div>';
             }
         
@@ -199,6 +208,7 @@
     let seeMore = document.getElementsByClassName("seeMore");
     let container = document.querySelector(".see");
     container.addEventListener("click",(e)=>{
+        e.target;
         for(let i=0 ;i<seeMore.length;i++)
     {
         if(seeMore[i].classList.contains("truncate"))
