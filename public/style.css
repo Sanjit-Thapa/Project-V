@@ -644,6 +644,10 @@ video {
   top: 1rem;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
 .-z-20 {
   z-index: -20;
 }
@@ -737,6 +741,10 @@ video {
 
 .block {
   display: block;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 .inline {
@@ -835,6 +843,18 @@ video {
   height: 100vh;
 }
 
+.h-\[30vh\] {
+  height: 30vh;
+}
+
+.h-\[80vh\] {
+  height: 80vh;
+}
+
+.h-4 {
+  height: 1rem;
+}
+
 .max-h-\[200px\] {
   max-height: 200px;
 }
@@ -919,6 +939,22 @@ video {
   width: 100vw;
 }
 
+.w-auto {
+  width: auto;
+}
+
+.w-\[90\%\] {
+  width: 90%;
+}
+
+.w-6 {
+  width: 1.5rem;
+}
+
+.w-\[15vw\] {
+  width: 15vw;
+}
+
 .min-w-\[40vw\] {
   min-width: 40vw;
 }
@@ -937,6 +973,10 @@ video {
 
 .max-w-xs {
   max-width: 20rem;
+}
+
+.max-w-4xl {
+  max-width: 56rem;
 }
 
 .flex-1 {
@@ -995,6 +1035,10 @@ video {
   gap: 2.5rem;
 }
 
+.gap-2 {
+  gap: 0.5rem;
+}
+
 .gap-4 {
   gap: 1rem;
 }
@@ -1013,10 +1057,6 @@ video {
 
 .gap-\[1\.8vw\] {
   gap: 1.8vw;
-}
-
-.gap-2 {
-  gap: 0.5rem;
 }
 
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
@@ -1055,6 +1095,12 @@ video {
   margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
 }
 
+.space-y-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
@@ -1070,6 +1116,10 @@ video {
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.whitespace-nowrap {
   white-space: nowrap;
 }
 
@@ -1487,6 +1537,11 @@ video {
   padding-bottom: 2rem;
 }
 
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .pb-4 {
   padding-bottom: 1rem;
 }
@@ -1679,6 +1734,10 @@ video {
 
 .leading-\[1\.0714285714\] {
   line-height: 1.0714285714;
+}
+
+.leading-relaxed {
+  line-height: 1.625;
 }
 
 .tracking-\[-0\.005em\] {
@@ -2289,6 +2348,21 @@ video {
 
   .md\:text-lg {
     font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .md\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .md\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .md\:text-xl {
+    font-size: 1.25rem;
     line-height: 1.75rem;
   }
 }

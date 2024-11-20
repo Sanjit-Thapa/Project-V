@@ -1,3 +1,25 @@
+<?php 
+
+    require "connection.php";
+    session_start();
+
+    if(isset($_POST['Reserve']))
+    {
+        $_SESSION['id'] = $_POST['Artid'];
+        header("Location:ReserveForm.php");
+        exit();
+    }
+    else{
+        echo "something is wrong";
+    }
+
+
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,61 +76,54 @@
     </section>
 
     <!-- About Us section -->
-    <section class=" relative overflow-hidden bg-[#e8c67d5b] border-red-400 w-screen" id="About">
-    <!-- Quote Section -->
-     <div class="bg-[url('./Assets/Floral.png')] absolute top-0 inset-0 w-full h-12 md:h-24 bg-contain bg-repeat-x opacity-30 -z-20 mix-blend-darken ">
-       
-     </div>
-   
-    <div class="container border-red-900 text-center space-y-4 relative mx-auto  h-full w-screen px-[2vw]">
-       <div class="inside px-9 py-8 w-[90vw] h-full  mx-auto">
-       <?php
-            require "connection.php";
+    <section class="relative overflow-hidden bg-[#e8c67d5b] border-red-400 w-full" id="About">
+  <!-- Top Floral Background -->
+  <div class="bg-[url('./Assets/Floral.png')] absolute top-0 left-0 w-full h-12 md:h-24 bg-contain bg-repeat-x opacity-30 -z-20 mix-blend-darken"></div>
 
-            //selection of the statement
+  <!-- Content Container -->
+  <div class="container mx-auto px-[2vw] py-8 text-center space-y-6">
+    <div class="inside px-6 py-8 w-[90%] mx-auto">
+      <?php
+        require "connection.php";
 
-            $sqlSel = "select Heading,Quote,Paragraph from aboutus_tb";
+        // Selection of the statement
+        $sqlSel = "SELECT Heading, Quote, Paragraph FROM aboutus_tb";
 
-            //preparing the statement
-            $stmt = $conn->prepare($sqlSel);
+        // Preparing the statement
+        $stmt = $conn->prepare($sqlSel);
 
-            //execution of the query
+        // Execution of the query
+        if ($stmt->execute()) {
+          $result = $stmt->get_result();
+          while ($row = $result->fetch_assoc()) {
+            echo "<h1 class='text-[2vw] pt-4 text-[#35282e] font-[rubik] break-words'>
+                    {$row['Heading']}
+                  </h1>";
 
-            if($stmt->execute())
-            {
-                $result = $stmt->get_result();
-                while($row = $result->fetch_assoc())
-                {
+            echo "<h2 class='text-[3vw] text-[#3a061f] font-[rubik] p-4 break-words'>
+                    {$row['Quote']}
+                  </h2>";
 
-            echo "<h1 class='text-[2vw] pt-4 text-[#35282e] font-[rubik]'>{$row['Heading']}</h1>";
-
-            echo "<h2 class='text-[3vw] text-[#3a061f] font-[rubik] p-4'>
-                {$row['Quote']}
-                 </h2>";
-
-            echo "<p class='text-[#3a061f] text-[1.1rem] text-center leading-8'>
-                {$row['Paragraph']}
-                 </p>";
-                }
-            }
-        ?>
-
-    </div>
+            echo "<p class='text-[#3a061f] text-[1.1rem] text-center leading-8 break-words'>
+                    {$row['Paragraph']}
+                  </p>";
+          }
+        }
+      ?>
     </div>
 
-       <!-- make the bouncy view Gallery ball bouncing -->
-       <div class="flex justify-center  items-center mx-auto ">
-            <div class="bouncyArt border-2 border-[#767618] w-32 h-20 text-center flex items-center justify-center rounded-lg cursor-pointer hover:scale-100 transition ease-in-out"  >
-                <h5 class="font-[rubik] text-xl text-black font-light">View Gallery</h5>
-            </div>
-        </div>
-
-    <div class="bg-[url('./Assets/Floral.png')] inset-0 w-full h-12 md:h-24 bg-contain bg-repeat-x opacity-30 -z-20 mix-blend-darken ">
-               
+    <!-- View Gallery Button -->
+    <div class="flex justify-center">
+      <div class="bouncyArt border-2 border-[#767618] px-8 py-4 text-center flex items-center justify-center rounded-lg cursor-pointer hover:scale-105 transition transform duration-300 ease-in-out">
+        <h5 class="font-[rubik] text-xl text-black font-light whitespace-nowrap">View Gallery</h5>
+      </div>
     </div>
+  </div>
 
-
+  <!-- Bottom Floral Background -->
+  <div class="bg-[url('./Assets/Floral.png')] absolute bottom-0 left-0 w-full h-12 md:h-24 bg-contain bg-repeat-x opacity-30 -z-20 mix-blend-darken"></div>
 </section>
+
 
 <!-- Now Product section -->
 
@@ -150,10 +165,12 @@
                       </div>';
         
                       echo '<div class="flex gap-2">
-                      <button class="mt-4 px-6 py-2 text-white bg-[#3a061f] rounded-full text-[0.95rem] font-semibold hover:bg-[#5f2a4e] transition duration-300" onclick="seeMore() pr-1">See more</button>
+                     
                       
-                      <form action="ReserveForm.php" method="post">
-                          <input type="number" name="Artid" value="' . $row['ArtId'] . '" readonly 
+                      <form action="ArtGallery.php" method="post">
+                         <button class="mt-4 px-6 py-2 text-white bg-[#3a061f] rounded-full text-[0.95rem] font-semibold hover:bg-[#5f2a4e] transition duration-300" onclick="seeMore() pr-1">See more</button>
+                        
+                        <input type="number" name="Artid" value="' . $row['ArtId'] . '" readonly 
                               class="hidden">
                           
                           <button type="submit" class="mt-4 px-6 py-2 text-white bg-[#082c1e] rounded-full text-[0.95rem] font-semibold hover:bg-[#202460] transition duration-300" name="Reserve">Reserve</button>
