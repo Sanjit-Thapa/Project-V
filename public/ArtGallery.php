@@ -164,18 +164,36 @@
                         <h2 class="text-black text-sm text-left mt-2 font-light truncate seeMore">' . $row['Description'] . '</h2>
                       </div>';
         
-                      echo '<div class="flex gap-2">
-                     
-                      
-                      <form action="ArtGallery.php" method="post">
-                         <button class="mt-4 px-6 py-2 text-white bg-[#3a061f] rounded-full text-[0.95rem] font-semibold hover:bg-[#5f2a4e] transition duration-300" onclick="seeMore() pr-1">See more</button>
+                      echo '<div class="flex justify-center gap-2 items-center mt-3">
+                      <!-- See More Button -->
+                      <button 
+                          class="More px-6 py-2 text-white bg-[#3a061f] rounded-full text-[0.95rem] font-semibold hover:bg-[#5f2a4e] transition duration-300 mb-4"
+                          style="width: 150px;" 
                         
-                        <input type="number" name="Artid" value="' . $row['ArtId'] . '" readonly 
-                              class="hidden">
-                          
-                          <button type="submit" class="mt-4 px-6 py-2 text-white bg-[#082c1e] rounded-full text-[0.95rem] font-semibold hover:bg-[#202460] transition duration-300" name="Reserve">Reserve</button>
+                      >
+                          See more
+                      </button>
+                      
+                      <!-- Reserve Form and Button -->
+                      <form action="ArtGallery.php" method="post" class="flex items-center">
+                          <input 
+                              type="number" 
+                              name="Artid" 
+                              value="' . $row['ArtId'] . '" 
+                              readonly 
+                              class="hidden"
+                          >
+                          <button 
+                              type="submit" 
+                              class="px-6 py-2 text-white bg-[#082c1e] rounded-full text-[0.95rem] font-semibold hover:bg-[#202460] transition duration-300"
+                              style="width: 150px;"
+                              name="Reserve"
+                          >
+                              Reserve
+                          </button>
                       </form>
                     </div>';
+              
               
                 echo '</div>';
             }
@@ -222,27 +240,34 @@
 
     //see more option for the longer text
 
-    let seeMore = document.getElementsByClassName("seeMore");
-    let container = document.querySelector(".see");
-    container.addEventListener("click",(e)=>{
-        e.target;
-        for(let i=0 ;i<seeMore.length;i++)
-    {
-        if(seeMore[i].classList.contains("truncate"))
-    {
-        seeMore[i].classList.remove("truncate");
-        seeMore[i].classList.add("break-words");
-    }
-   else{
-        seeMore[i].classList.remove("break-words");
-        seeMore[i].classList.add("truncate");
-    }
-    }
-    
-    })
-  
+    let More = document.querySelectorAll(".More");
 
+for (let i = 0; i < More.length; i++) {
+    More[i].addEventListener("click", (evt) => {
+        let parent = More[i].parentNode;
+        let GrandParent = parent.parentElement;
+        let seeMore = GrandParent.childNodes[1];
+
+        // Use children instead of childNodes to get only element nodes
+        let texts = seeMore.children;
+
+    
+        for (let k = 0; k < texts.length; k++) {
+            // Safely manipulate the element
+            console.log(texts[k]); // Logs each child element
+           if(texts[k].classList.contains("truncate"))
+           {
+            texts[k].classList.remove("truncate");
+            texts[k].classList.add("break-words");
+           }
+           else{
+            texts[k].classList.remove("break-words");
+            texts[k].classList.add("truncate");
+            }
+        }
+    });
+}
   
-    </script>
+</script>
 </body>
 </html>

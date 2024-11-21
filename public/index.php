@@ -9,41 +9,41 @@
 
     // mysqli_bind_param($sql,'s',)
     
+    
 
-    if(isset($_GET['page']))
-    {
+    if (isset($_GET['page'])) {
         $page = $_GET['page'];
         echo $page;
-        if($page=='setting')
-        {
-           $pageinclude =  "setting.php";
-           
-        }
-        elseif($page=='banner'){
-            $pageinclude = "Banner.php";
-        }
-        elseif($page=='about'){
-            $pageinclude ="AboutUS.php";
-        }
-        elseif($page=='artist'){
-            $pageinclude = "ArtistStatus.php";
-        }
-        elseif($page=='status')
-    {
-        $pageinclude = "Artstatus.php";
-        
-    }  
-    elseif($page=='list')
-    {
-        $pageinclude = "ArtSelect.php";
-        
-    }  
-  }
-   else{
-    $pageinclude = "ad.php";
-    // $pageinclude = "";//make this as the dashboard part whenever the user visits they firstly see this part //work to be done
-   }
     
+        switch ($page) {
+            case 'setting':
+                $pageinclude = "setting.php";
+                break;
+            case 'banner':
+                $pageinclude = "Banner.php";
+                break;
+            case 'about':
+                $pageinclude = "AboutUS.php";
+                break;
+            case 'artist':
+                $pageinclude = "ArtistStatus.php";
+                break;
+            case 'status':
+                $pageinclude = "Artstatus.php";
+                break;
+            case 'list':
+                $pageinclude = "ArtSelect.php";
+                break;
+            case 'dashboard':
+                $pageinclude = "Dashboard.php";
+                break;
+            default:
+                $pageinclude = "Dashboard.php";
+                break;
+        }
+    }
+    
+
 
    //for extracting the image into the profile of the admin
    $sql = "select Email,ImgDir from adminlogin_tb";
@@ -206,7 +206,7 @@
             <div class="flex flex-col justify-start items-start  "> 
                 <div class="m-3">
                    <a href="https://www.facebook.com"> <button class="fa-solid fa-chart-simple text-[1.8vw] text-white p-3  hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5">
-                  </button></a> <label for="dashboard" class= "label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400" ><a href="#">Dashboard</a></label>
+                  </button></a> <label for="dashboard" class= "label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400" ><a href="?page=dashboard">Dashboard</a></label>
             </div>
 
             <div class="m-3">
