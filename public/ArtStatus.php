@@ -45,11 +45,11 @@
 <body>
 <div class="text-center">
     <h1 class="text-slate-800 font-semibold text-[1rem] mb-2">Art Status</h1>
-    <div class="overflow-x-auto">
-        <table class="w-full max-w-full mx-auto border-collapse border rounded-lg overflow-hidden shadow-lg">
-            <thead>
+    <div class="overflow-x-auto max-h-[70vh] mx-auto  border-2 border-black"> <!-- Increased height -->
+        <table class="w-full max-w-full  mx-auto border-collapse border-2 border-green-600 rounded-lg overflow-hidden shadow-lg">
+            <thead class="ticky top-0 z-40 w-full">
                 <tr class="bg-slate-700">
-                <th class="p-1 text-sm border border-slate-600 text-white">Art ID</th>
+                    <th class="p-1 text-sm border border-slate-600 text-white">Art ID</th>
                     <th class="p-1 text-sm border border-slate-600 text-white">Artist ID</th>
                     <th class="p-2 text-sm border border-slate-600 text-white">Art Title</th>
                     <th class="p-2 text-sm border border-slate-600 text-white">Description</th>
@@ -72,7 +72,7 @@
                         echo "<tr class='border-b hover:bg-gray-100'>";
 
                         // ArtId
-                               echo "<td class=' text-center border border-slate-600'>
+                        echo "<td class=' text-center border border-slate-600'>
                                <input type='number' name='Artid' value='{$row['ArtId']}' readonly class='bg-transparent text-center w-full'>
                              </td>";
                         // ArtistId
@@ -105,7 +105,7 @@
                         // Action buttons (Centered)
                         echo "<td class=' text-center space-x-2 border border-slate-600 '>
                                 <button type='submit' name='Reject' value='Rejected' class='px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition mb-2'>Reject</button>
-                                
+                                  
                                 <button type='submit' name='Approve' value='Approved' class='px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition'>Approve</button>
                               </td>";
 
@@ -120,6 +120,8 @@
         </table>
     </div>
 </div>
+
+
 
 </body>
 </html>

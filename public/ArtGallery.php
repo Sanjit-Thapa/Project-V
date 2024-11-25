@@ -28,6 +28,32 @@
     <title>Art Gallery</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    <style>
+  /* width */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(160, 121, 22); 
+    border-radius: 10px;
+    height: 2px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background:#312f2a; 
+    border-radius: 10px;
+   
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b30000; 
+  }
+  </style>
 </head>
 <body class=" text-[#F1EDE4] font-sans overflow-x-hidden">
 
@@ -70,8 +96,8 @@
                 ?>
             </div>
             <!-- Navigation buttons -->
-            <div class="swiper-button-next text-[#D9BB63] "></div>
-            <div class="swiper-button-prev text-[#D9BB63] mr-1"></div>
+            <div class="swiper-button-next  "></div>
+            <div class="swiper-button-prev  "></div>
         </div>
     </section>
 
@@ -114,7 +140,7 @@
 
     <!-- View Gallery Button -->
     <div class="flex justify-center">
-      <div class="bouncyArt border-2 border-[#767618] px-8 py-4 text-center flex items-center justify-center rounded-lg cursor-pointer hover:scale-105 transition transform duration-300 ease-in-out">
+      <div class="bouncyArt  border-[#767618] px-8 py-4 text-center flex items-center justify-center rounded-lg cursor-pointer hover:scale-105 transition transform duration-300 ease-in-out">
         <h5 class="font-[rubik] text-xl text-black font-light whitespace-nowrap">View Gallery</h5>
       </div>
     </div>
@@ -127,7 +153,7 @@
 
 <!-- Now Product section -->
 
-<section class="border-2">
+<section class="">
     <div class="pl-8 pt-10">
         <h2 class="text-[56px] leading-[1.0714285714] font-semibold tracking-[-0.005em] font-[rubik] text-[#3a061f]">
             Explore The Best
@@ -135,82 +161,65 @@
     </div>
 
     <!-- Products Section -->
-   
-        <?php 
-            require "connection.php";
-        
-            //selection of the product that was approved to be listed on the site
+    <?php 
+    require "connection.php";
 
-            $sql = "select * from artistview_tb where Listed = 'Yes' ";
+    // Selection of the product that was approved to be listed on the site
+    $sql = "SELECT * FROM artistview_tb WHERE Listed = 'Yes' LIMIT 8";
 
-            //execution of the querry
+    // Execution of the query
+    $result =  $conn->query($sql);
+    if ($result) {
+        echo '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 p-4 mt-7">';
 
-           $result =  $conn->query($sql);
-           if ($result) {
-            echo '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 border-2 border-green-200 p-4">';
-            
-            while ($row = mysqli_fetch_assoc($result)) {
-                // Product Card
-                
+        while ($row = mysqli_fetch_assoc($result)) {
+            // Product Card
+            echo '<div class="flex flex-col items-stretch border-2 p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 h-full">';
 
-                echo '<div class="flex flex-col items-center border-2 p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105">';
+            // Product Image
+            echo '<img src="' . $row['ImgPath'] . '" alt="Product Image" 
+                  class="w-full h-[200px] object-contain mb-6 rounded-md shadow-md transition-all duration-300 ease-in-out">';
 
-                echo '<img src="' . $row['ImgPath'] . '" alt="Product Image" 
-                      class="w-full h-auto max-h-[200px] object-contain mb-6 rounded-md shadow-md transition-all duration-300 ease-in-out">';
-        
-                echo '<div class="see w-full text-center p-4 rounded-md shadow-sm cursor-pointer">
-                        <h4 class="text-[1rem] font-semibold text-[#3a061f] mb-2 truncate seeMore">' . $row['ArtTitle'] . '</h4>
-                        <h4 class="text-[1rem] font-semibold text-[#3a061f] mb-2 truncate seeMore">' . $row['ArtForm'] . '</h4>
-                        <h2 class="text-black text-sm text-left mt-2 font-light truncate seeMore">' . $row['Description'] . '</h2>
-                      </div>';
-        
-                      echo '<div class="flex justify-center gap-2 items-center mt-3">
-                      <!-- See More Button -->
-                      <button 
-                          class="More px-6 py-2 text-white bg-[#3a061f] rounded-full text-[0.95rem] font-semibold hover:bg-[#5f2a4e] transition duration-300 mb-4"
-                          style="width: 150px;" 
-                        
-                      >
-                          See more
-                      </button>
-                      
-                      <!-- Reserve Form and Button -->
-                      <form action="ArtGallery.php" method="post" class="flex items-center">
-                          <input 
-                              type="number" 
-                              name="Artid" 
-                              value="' . $row['ArtId'] . '" 
-                              readonly 
-                              class="hidden"
-                          >
-                          <button 
-                              type="submit" 
-                              class="px-6 py-2 text-white bg-[#082c1e] rounded-full text-[0.95rem] font-semibold hover:bg-[#202460] transition duration-300"
-                              style="width: 150px;"
-                              name="Reserve"
-                          >
-                              Reserve
-                          </button>
-                      </form>
-                    </div>';
-              
-              
-                echo '</div>';
-            }
-        
-            echo '</div>'; // Close the grid container
+            // Product Details (Content Section)
+            echo '<div class="flex-grow text-center p-4 rounded-md shadow-sm cursor-pointer">';
+            echo '<h4 class="text-[1rem] uppercase font-semibold text-[#3a061f] mb-2 truncate">' . $row['ArtTitle'] . '</h4>';
+            echo '<h4 class="text-[1rem] font-semibold text-[#3a061f] mb-2 truncate">' . $row['ArtForm'] . '</h4>';
+            echo '<h2 class="text-black text-sm text-left mt-2 font-light truncate">' . $row['Description'] . '</h2>';
+            echo '</div>';
+
+            // Buttons and Form
+            echo '<div class="flex justify-center gap-2 items-center mt-3">';
+            echo '<button class="More px-6 py-2 text-white bg-[#3a061f] rounded-full text-[0.95rem] font-semibold hover:bg-[#5f2a4e] transition duration-300 mb-4" style="width: 150px;">See more</button>';
+            echo '<form action="ArtGallery.php" method="post" class="flex items-center">';
+            echo '<input type="number" name="Artid" value="' . $row['ArtId'] . '" readonly class="hidden">';
+            echo '<button type="submit" class="px-6 py-2 text-white bg-[#082c1e] rounded-full text-[0.95rem] font-semibold hover:bg-[#202460] transition duration-300" style="width: 150px;" name="Reserve">Enquire</button>';
+            echo '</form>';
+            echo '</div>';
+
+            echo '</div>';
         }
-        
+
+        // Center the "View More Gallery" button below the grid
+        echo '<div class="col-span-full  w-full text-center mt-6">
+                <button class="border-2  px-6 py-2 text-[#3a061f] bg-[#e8c67d5b] rounded-full hover:bg-[#312f2a] font-[rubik] text-xl hover:text-white transition duration-300">
+                <a href="EntireGallery.php" target="_blank">
+                      View More 
+                </a>
+                
+                </button>
+              </div>';
+
+        echo '</div>'; // Close the grid container
+    }
+?>
 
 
-    
-        ?>
-       
-    
-      
-    </div>
-</section>    
 </section>
+
+</section>
+
+<!-- footer Section -->
+<?php include "include/footer.html" ?>
 
 
 
@@ -248,12 +257,12 @@ for (let i = 0; i < More.length; i++) {
         let GrandParent = parent.parentElement;
         let seeMore = GrandParent.childNodes[1];
 
-        // Use children instead of childNodes to get only element nodes
+        // Using children instead of childNodes to get only element nodes
         let texts = seeMore.children;
 
     
         for (let k = 0; k < texts.length; k++) {
-            // Safely manipulate the element
+
             console.log(texts[k]); // Logs each child element
            if(texts[k].classList.contains("truncate"))
            {

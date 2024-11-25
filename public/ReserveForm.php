@@ -69,14 +69,14 @@
         $mail->isSMTP();                                            //Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'sandipthapa383@gmail.com';                     //SMTP username
-        $mail->Password   = 'hnlt ktui wkvg zobq';                               //SMTP password
+        $mail->Username   = '';                     //SMTP username
+        $mail->Password   = '';                               //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
         //Recipients
         $mail->setFrom($email, 'User');
-        $mail->addAddress('sandipthapa383@gmail.com', 'Admin');     //Add a recipient
+        $mail->addAddress('', 'Admin');     //Add a recipient
     
     
         //Attachments
@@ -133,9 +133,13 @@
                     <p><span class='highlight'>Name:</span> $name</p>
                     <p><span class='highlight'>Telephone Number:</span> $code $phone</p>
                     <p><span class='highlight'>Enquiring:</span> $enquire</p>
+                     <p><a href='http://localhost/Project-V/public/toggleStatus.php?ArtId=$artId' class='button'>Change Listing Status</a></p>
+                   
                     <div class='footer'>
-                        <p>This email was sent from your website's enquiry form.</p>
+                        <p>This email was sent from your website's enquiry form with art id : $id</p>
                     </div>
+
+
                 </div>
             </body>
             </html>";

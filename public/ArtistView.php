@@ -9,9 +9,9 @@ require "connection.php";
 
     $sqlSel = "select ArtistProfile,Username,Artistmail from artistsignup_tb where Artist_Id = ?";
 
-     $stm = mysqli_prepare($conn,$sqlSel);
+    $stm = mysqli_prepare($conn,$sqlSel);
 
-      mysqli_stmt_bind_param($stm,'i',$id);
+    mysqli_stmt_bind_param($stm,'i',$id);
 
     // Execute the statement
     mysqli_stmt_execute($stm);
@@ -125,6 +125,41 @@ require "connection.php";
             echo "No file uploaded.";
         }
     }
+
+}
+
+if(isset($_POST['update']))
+{
+    //getting the access of the new password
+
+    $newPassword = $_POST['new_password'];
+
+    $newhashed = password_hash($newPassword,PASSWORD_DEFAULT);
+    
+    //sql querry to update the password
+
+    $sqlUpd = "update artistsignup_tb set ArtistPassword = ? where Artist_Id = ?";
+
+    //preparing the statement
+
+    $stmUpd = $conn->prepare($sqlUpd);
+
+    //binding the parameter
+
+    $stmUpd->bind_param('si',$newhashed,$id);
+
+    //execution of the statement
+
+    $result = $stmUpd->execute();
+
+    if($result===true)
+    {
+        echo "Updation of the password is successful";
+    }
+    else{
+        echo "sorry the password is not updated";
+    }
+
 
 }
 
@@ -251,10 +286,16 @@ require "connection.php";
                 </form>
 
                 <!-- Change Password Form -->
-                <form action="change_password.php" method="post" class="mt-6">
+                <form action="ArtistView.php" method="post" class="mt-6">
+                    
+                            
                     <label for="newPassword" class="block text-indigo-700 font-semibold mb-2">Change Password</label>
                     <input type="password" id="newPassword" name="new_password" placeholder="New Password" class="w-full border rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-300">
-                    <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-400 transition duration-300">Update Password</button>
+
+                    <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-400 transition duration-300" name="update">Update Password</button>
+
+                </form>
+                    
                 </form>
             </section>
         </main>

@@ -10,11 +10,11 @@
     // mysqli_bind_param($sql,'s',)
     
     
+    $pageinclude = "Dashboard.php"; // Default page
 
     if (isset($_GET['page'])) {
-        $page = $_GET['page'];
-        echo $page;
-    
+        $page = trim($_GET['page']);
+        
         switch ($page) {
             case 'setting':
                 $pageinclude = "setting.php";
@@ -37,7 +37,11 @@
             case 'dashboard':
                 $pageinclude = "Dashboard.php";
                 break;
+            case 'Userlist':
+                $pageinclude = "UserList.php";
+                break;
             default:
+                // fallback to the default
                 $pageinclude = "Dashboard.php";
                 break;
         }
@@ -203,7 +207,7 @@
             <button class="fa-solid fa-bars text-[1.8vw] text-white p-2 hover:text-[#3b1066] transition ease-in-out delay-10 cursor bg-gradient-to-r from-blue-800 via-cyan-700 to-teal-500  w-full" id="burgerBtn">
             </button>
             
-            <div class="flex flex-col justify-start items-start  "> 
+            <div class="flex flex-col justify-start items-start"> 
                 <div class="m-3">
                    <a href="https://www.facebook.com"> <button class="fa-solid fa-chart-simple text-[1.8vw] text-white p-3  hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5">
                   </button></a> <label for="dashboard" class= "label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400" ><a href="?page=dashboard">Dashboard</a></label>
@@ -217,7 +221,7 @@
             <div class="m-3">
                  <a href="#"> <button class="fa-brands fa-telegram text-[1.8vw] text-white p-3  hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5">
                  </button></a>
-                 <label for="enquiry"  class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="#">Enquiry</a></label>
+                 <label for="enquiry"  class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="?page=Userlist">User List</a></label>
             </div>
             
             <div class="m-3 ">
@@ -246,6 +250,7 @@
                         <div class=" border-2 text-center "> 
                             <label for="AboutUs" class="text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="?page=list">Art List</a></label> 
                         </div>
+                        
                 </div>
               
             </div>
