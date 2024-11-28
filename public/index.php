@@ -217,7 +217,7 @@
     <div class="flex">
         <div class="w-[17%] max-h-full  bg-blue-900 " id="menu">
             <!-- Buttons in the sidebar -->
-            <button class="fa-solid fa-bars text-[1.8vw] text-white p-2 hover:text-[#3b1066] transition ease-in-out delay-10 cursor bg-gradient-to-r from-blue-800 via-cyan-700 to-teal-500  w-full" id="burgerBtn">
+            <button class="fa-solid fa-bars text-[1.8vw] text-white p-4 hover:text-[#3b1066] transition ease-in-out delay-10 cursor bg-gradient-to-r from-blue-800 via-cyan-700 to-teal-500  w-full" id="burgerBtn">
             </button>
             
             <div class="flex flex-col justify-start items-start"> 
@@ -249,11 +249,11 @@
             </div>
     
             <div class="display cursor-pointer hover:bg-orange-900 w-full" onclick="options()">
-                <a href="#"><button class="fa-solid fa-table-cells text-[1.8vw] text-white p-3 hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5"></button></a> 
+                <a href="#"><button class="fa-solid fa-table-cells text-[1.8vw] text-white p-3 ml-3 hover:text-[#a3aebe] transition ease-in-out delay-10 cursor  pt-5"></button></a> 
                 <label for="Art" class="label text-white text-2xl pl-4 cursor-pointer hover:text-sky-400  ">Display</label>
                 <i class="fa-solid fa-chevron-right text-white pl-1 text-xl"></i>
 
-                <div class="Banner hidden">
+                <div class="Banner hidden bg-blue-900">
                          <div class=" border-2 text-center "> 
                             <label for="BannerUpload" class="text-white text-2xl pl-4 cursor-pointer hover:text-sky-400 "><a href="?page=banner">Banner</a></label> 
                          </div>

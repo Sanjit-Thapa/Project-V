@@ -179,29 +179,22 @@ if(isset($_POST['update']))
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col">
 
-    <!-- <?php
-    // Assume $username contains the artist's username, and $profilePicturePath contains the profile picture path
-    //$username = "ArtistName";  // Replace with actual PHP variable for username
-    //$profilePicturePath = "./Assets/ArtistProfile/placeholder.jpg";  // Replace with actual profile picture path
-    ?> -->
-
     <!-- Sidebar with Profile -->
-    <div class="flex flex-col md:flex-row h-full">
+    <div class="flex flex-col md:flex-row h-[100%]">
         <!-- Sidebar Navigation -->
-        <nav class="bg-indigo-700 text-white w-full h-screen md:w-1/4 lg:w-1/5 p-5 flex flex-col items-center ">
-            <div class="mb-6 text-center">
+        <nav class="bg-indigo-800 text-white w-full md:w-1/4 lg:w-1/5 p-5 flex flex-col items-center shadow-lg">
+            <div class="mb-8 text-center">
                 <!-- Profile Picture -->
-                <div class="w-24 h-24 rounded-full bg-gray-200 overflow-hidden mb-2">
+                <div class="w-24 h-24 rounded-full bg-gray-200 overflow-hidden mb-4 shadow-md">
                     <img src="<?php echo $ProfilePic; ?>" alt="Profile Picture" class="w-full h-full object-cover">
                 </div>
                 <!-- Username Display -->
-                <p class="text-2xl font-semibold text-orange-200"><?php echo $username; ?></p>
+                <p class="text-2xl font-bold text-orange-300"><?php echo $username; ?></p>
             </div>
-            <ul class="space-y-4 text-center">
-                <li><a href="#upload" class="block hover:bg-indigo-500 p-3 rounded-lg">Upload Artwork</a></li>
-                <li><a href="#status" class="block hover:bg-indigo-500 p-3 rounded-lg">Artwork Status</a></li>
-                <li><a href="#inquiries" class="block hover:bg-indigo-500 p-3 rounded-lg">Inquiries</a></li>
-                <li><a href="#profile" class="block hover:bg-indigo-500 p-3 rounded-lg">Profile</a></li>
+            <ul class="space-y-4 w-full">
+                <li><a href="#upload" class="block p-3 rounded-lg bg-indigo-700 hover:bg-indigo-600 transition text-center">Upload Artwork</a></li>
+                <li><a href="#status" class="block p-3 rounded-lg bg-indigo-700 hover:bg-indigo-600 transition text-center">Artwork Status</a></li>
+                <li><a href="#profile" class="block p-3 rounded-lg bg-indigo-700 hover:bg-indigo-600 transition text-center">Profile</a></li>
             </ul>
         </nav>
 
@@ -210,18 +203,42 @@ if(isset($_POST['update']))
             <!-- Upload Artwork Section -->
             <section id="upload" class="bg-white shadow rounded-lg p-6">
                 <h3 class="text-2xl font-bold mb-4 text-indigo-700">Upload Artwork</h3>
-                <form action="ArtistView.php" method="post" class="space-y-4" enctype="multipart/form-data">
-                    <input type="text" placeholder="Title of the Artwork" class="w-full border rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-300" name="Title">
-                    <textarea placeholder="Description" class="w-full border rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-300" name="description"></textarea>
-                    <select class="w-full border rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-300" name="artform">
-                        <option>Select Art Form</option>
-                        <option>Painting</option>
-                        <option>Sculpture</option>
-                        <option>Digital Art</option>
-                    </select>
-                    <input type="file" name="img" id="img" accept="image/*" class="w-full border rounded p-3 mb-4 cursor-pointer focus:outline-none">
-                    <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-800 transition" name="submit">Submit Artwork</button>
-                </form>
+                <form action="ArtistView.php" onsubmit="return doneMsg()"  method="post" class="space-y-4" enctype="multipart/form-data">
+    <!-- Title of the Artwork -->
+    <input type="text" 
+           placeholder="Title of the Artwork" 
+           class="w-full border rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-300" 
+           name="Title" 
+           required>
+    
+    <!-- Description -->
+    <textarea placeholder="Description" 
+              class="w-full border rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-300" 
+              name="description" 
+              required></textarea>
+    
+    <!-- Art Form -->
+    <select class="w-full border rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-300" 
+            name="artform" 
+            required>
+        <option value="" disabled selected>Select Art Form</option>
+        <option value="Painting">Painting</option>
+        <option value="Sculpture">Sculpture</option>
+        <option value="Digital Art">Digital Art</option>
+    </select>
+    
+    <!-- Artwork Image -->
+    <input type="file" 
+           name="img" 
+           id="img" 
+           accept="image/*" 
+           class="w-full border rounded p-3 mb-4 cursor-pointer focus:outline-none" 
+           required>
+    
+    <!-- Submit Button -->
+    <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-800 transition" 
+            name="submit">Submit Artwork</button>
+</form>
             </section>
 
             <!-- Artwork Status Section -->
@@ -237,8 +254,8 @@ if(isset($_POST['update']))
                         </tr>
                     </thead>
                     <tbody>
-                         <?php
-                            $sqlSel = "select ArtTitle,ArtForm,Status,Remarks from artistview_tb where Artistid = ?";
+                        <?php
+                            $sqlSel = "SELECT ArtTitle, ArtForm, Status, Remarks FROM artistview_tb WHERE Artistid = ?";
                             $stm = $conn->prepare($sqlSel);
                             $stm->bind_param('i', $id);
                             $result = $stm->execute();
@@ -247,59 +264,46 @@ if(isset($_POST['update']))
                                 $result = $stm->get_result();
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo "<tr class='border-b hover:bg-gray-100'>";
-                                    echo "<td class='p-2 text-sm border border-slate-600 break-words max-w-xs overflow-hidden'>" . htmlspecialchars($row['ArtTitle']) . "</td>";
-                                    echo "<td class='p-2 text-sm border border-slate-600 break-words max-w-xs overflow-hidden'>" . htmlspecialchars($row['ArtForm']) . "</td>";
-                                    echo "<td class='p-1 text-sm border border-slate-600 break-words max-w-xs overflow-hidden h-16'>" . htmlspecialchars($row['Status']) . "</td>";
-                                    echo "<td class='p-2 text-sm border border-slate-600 break-words max-w-xs overflow-hidden'>" . htmlspecialchars($row['Remarks']) . "</td>";
+                                    echo "<td class='p-3 text-sm'>" . htmlspecialchars($row['ArtTitle']) . "</td>";
+                                    echo "<td class='p-3 text-sm'>" . htmlspecialchars($row['ArtForm']) . "</td>";
+                                    echo "<td class='p-3 text-sm'>" . htmlspecialchars($row['Status']) . "</td>";
+                                    echo "<td class='p-3 text-sm'>" . htmlspecialchars($row['Remarks']) . "</td>";
+                                    echo "</tr>";
                                 }
                             } else {
                                 echo "<tr><td colspan='4' class='p-3 text-center'>The query did not execute.</td></tr>";
                             }
-                         ?>
+                        ?>
                     </tbody>
                 </table>
-            </section>
-
-            <!-- Inquiries Section -->
-            <section id="inquiries" class="bg-white shadow rounded-lg p-6">
-                <h3 class="text-2xl font-bold mb-4 text-indigo-700">Inquiries</h3>
-                <ul class="space-y-4">
-                    <li class="p-4 bg-gray-50 rounded-lg shadow">
-                        <h4 class="font-bold text-lg">Client Inquiry</h4>
-                        <p>Interested in "Sunset Painting".</p>
-                        <p class="text-sm text-gray-500">Status: Under Review</p>
-                    </li>
-                </ul>
             </section>
 
             <!-- Profile Section -->
             <section id="profile" class="bg-white shadow rounded-lg p-6">
                 <h3 class="text-2xl font-bold mb-4 text-indigo-700">Profile</h3>
-                <p class="text-lg">Welcome back, <strong><?php echo $username ?></strong>!</p>
+                <p class="text-lg">Welcome back, <strong><?php echo $username; ?></strong>!</p>
                 <p class="text-gray-600">This is your personal dashboard. You can view, manage, and submit your artworks here.</p>
-                
                 <!-- Change Profile Picture Form -->
                 <form action="ArtistView.php" method="post" enctype="multipart/form-data" class="mt-4">
                     <label for="profilePictureInput" class="block text-indigo-700 font-semibold mb-2">Change Profile Picture</label>
-                    <input type="file" id="profilePictureInput" name="profile_picture" class="w-full border rounded p-3 mb-4 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-300"  accept="image/*">
-                    <button type="submit" name="profilePic" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-400 transition duration-300">Save Profile Picture</button>
+                    <input type="file" id="profilePictureInput" name="profile_picture" class="w-full border rounded p-3 mb-4 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-300" accept="image/*">
+                    <button type="submit" name="profilePic" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-400 transition">Save Profile Picture</button>
                 </form>
-
                 <!-- Change Password Form -->
-                <form action="ArtistView.php" method="post" class="mt-6">
-                    
-                            
+                <form action="ArtistView.php"  method="post" class="mt-6">
                     <label for="newPassword" class="block text-indigo-700 font-semibold mb-2">Change Password</label>
                     <input type="password" id="newPassword" name="new_password" placeholder="New Password" class="w-full border rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-300">
-
-                    <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-400 transition duration-300" name="update">Update Password</button>
-
-                </form>
-                    
+                    <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-400 transition" name="update">Update Password</button>
                 </form>
             </section>
         </main>
     </div>
 
+    <script>
+        function doneMsg()
+        {
+            alert("The record is placed successfully");
+        }
+    </script>
 </body>
 </html>
