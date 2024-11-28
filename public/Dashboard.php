@@ -132,7 +132,7 @@
             <!-- Total Reserved Products -->
             <div class="p-8 text-center rounded-xl shadow-lg bg-gradient-to-r from-green-400 to-teal-500 text-white 
                         hover:scale-105 hover:shadow-2xl transition-transform duration-300 ease-in-out">
-                <h2 class="text-2xl font-semibold">Total Products Reserved</h2>
+                <h2 class="text-2xl font-semibold">Total Enquiry</h2>
                 <p class="text-5xl font-bold mt-6"><?php Reserved(); ?></p>
             </div>
 

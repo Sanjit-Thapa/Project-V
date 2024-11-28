@@ -28,7 +28,8 @@
         if($stm->execute()===true)
         {
             
-            echo "The updation of the statement is completed";
+            // echo "The updation of the statement is completed";
+            header("Location:./AfterEffects/GoBackDashboard.html");
         }
         else{
             echo "Sorry! the statement execution is not able to complete";

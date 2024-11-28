@@ -2,6 +2,7 @@
 <?php 
     include "connection.php";
 
+    session_start();
    
     // $sql = "SELECT ImgDir FROM adminlogin_tb WHERE Email = ?";
 
@@ -9,7 +10,9 @@
 
     // mysqli_bind_param($sql,'s',)
     
-    
+    if(isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === true)
+    {
+         
     $pageinclude = "Dashboard.php"; // Default page
 
     if (isset($_GET['page'])) {
@@ -108,7 +111,17 @@
     else{
         echo "Form is not submitted";
     }
+
+  
    
+    }
+    else{
+        header("Location:login.php");
+        exit();
+    }
+
+   
+  
     //updation of the profile picture
     
 ?>
