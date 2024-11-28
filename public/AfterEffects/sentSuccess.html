@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message Sent</title>
+  <link rel="stylesheet" href="../style.css">  <style>
+    .fade-in {
+      animation: fadeIn 1.5s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
+  <div class="text-center fade-in">
+    <div class="bg-green-500 text-white py-4 px-8 rounded-md shadow-lg">
+      <h1 class="text-2xl font-semibold">Message Sent Successfully!</h1>
+      <p class="mt-2 text-lg">Your email has been sent. Thank you!</p>
+    </div>
+    <button 
+      onclick="window.location.href='../index.php'" 
+      class="mt-6 bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition duration-300">
+      Go Back to Homepage
+    </button>
+  </div>
+</body>
+</html>
