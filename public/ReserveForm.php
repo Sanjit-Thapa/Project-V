@@ -1,12 +1,14 @@
 <?php
     
+    session_start();
+    ob_start();
 
     require "connection.php";
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
-    session_start();
+  
 
 
 
@@ -65,18 +67,18 @@
  
         try {
         //Server settings
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+       $mail->SMTPDebug = SMTP::DEBUG_SERVER;                       //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = '';                     //SMTP username
-        $mail->Password   = '';                               //SMTP password
+        $mail->Username   = 'sandipthapa383@gmail.com';                     //SMTP username
+        $mail->Password   = 'hnlt ktui wkvg zobq';                               //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
         //Recipients
         $mail->setFrom($email, 'User');
-        $mail->addAddress('', 'Admin');     //Add a recipient
+        $mail->addAddress('sandipthapa383@gmail.com', 'Admin');     //Add a recipient
     
     
         //Attachments
@@ -147,7 +149,14 @@
         
     
         $mail->send();
-        echo 'Message has been sent';
+       
+       // Check for headers already sent
+if (!headers_sent()) {
+    header("Location:./AfterEffects/sent_to_Art_Gallery.html");
+} else {
+    echo "Headers already sent. Can't redirect.";
+}
+
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
@@ -161,14 +170,7 @@
     else{
         echo "hi";
     }
-
-    
- 
- 
-     
-
-
-
+ob_flush();
 ?>
 
 
