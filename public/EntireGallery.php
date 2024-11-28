@@ -73,7 +73,7 @@
 
                             echo '<div class="flex justify-center gap-2 mt-3">';
                             echo '<button class="More px-4 py-2 bg-[#3a061f] text-white rounded-full text-sm hover:bg-[#5f2a4e] truncate">See More</button>';
-                            echo '<form action="ArtGallery.php" method="post">';
+                            echo '<form action="ReserveForm.php" method="post">';
                             echo '<input type="hidden" name="Artid" value="' . $row['ArtId'] . '">';
                             echo '<button type="submit" name="Reserve" class="px-4 py-2 bg-[#082c1e] text-white rounded-full text-sm hover:bg-[#202460]">Enquire</button>';
                             echo '</form>';

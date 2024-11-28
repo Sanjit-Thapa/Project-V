@@ -105,7 +105,7 @@ else {
                  </form>
 
                  <div class="flex gap-5 pl-5">
-                    <a href="#" class=" hover:underline transition duration-200 pt-1 text-xl">Forgot Account?</a>
+                    <a href="Reset_password_form.php" class=" hover:underline transition duration-200 pt-1 text-xl">Forgot Account?</a>
                
                 </div>
         </div>

@@ -201,12 +201,14 @@
 
         // Center the "View More Gallery" button below the grid
         echo '<div class="col-span-full  w-full text-center mt-6">
-                <button class="border-2  px-6 py-2 text-[#3a061f] bg-[#e8c67d5b] rounded-full hover:bg-[#312f2a] font-[rubik] text-xl hover:text-white transition duration-300">
-                <a href="EntireGallery.php" target="_blank">
+           <a href="EntireGallery.php" target="_blank">        
+        <button class="border-2  px-6 py-2 text-[#3a061f] bg-[#e8c67d5b] rounded-full hover:bg-[#312f2a] font-[rubik] text-xl hover:text-white transition duration-300">
+             
                       View More 
-                </a>
+              
                 
                 </button>
+                  </a>
               </div>';
 
         echo '</div>'; // Close the grid container

@@ -122,6 +122,10 @@ else {
                        class="w-full px-4 py-2 border rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-300 focus:border-transparent">
             </div>
 
+            <div class="validated">
+                    
+            </div>
+
             <!-- Submit Button -->
             <button type="submit" name="submit" class="w-full bg-teal-500 text-white font-bold py-2 rounded-lg hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-300 focus:ring-opacity-50">
                 Login
@@ -129,7 +133,7 @@ else {
 
             <!-- Additional Links -->
             <div class="flex justify-between text-sm mt-4">
-                <a href="#" class="text-teal-500 font-semibold hover:text-teal-600">Forgot Password?</a>
+                <a href="./ArtistForgotPassword/Reset_password_form_artist.php" class="text-teal-500 font-semibold hover:text-teal-600">Forgot Password?</a>
                 <a href="ArtistSign.php" class="text-teal-500 font-semibold hover:text-teal-600">New here? Sign Up</a>
             </div>
             
@@ -139,6 +143,10 @@ else {
   
 
 </body>
+
+        <script>
+
+        </script>
 
 </body>
 </html>

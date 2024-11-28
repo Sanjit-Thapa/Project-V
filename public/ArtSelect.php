@@ -24,7 +24,8 @@
     
         // Execute the query
         if($stm->execute() === true) {
-            echo "Updation successful";
+            // echo "Updation successful";
+            header("Location:./AfterEffects/GoBackDashboard.html");
         } else {
             echo "Updation is not successful";
         }

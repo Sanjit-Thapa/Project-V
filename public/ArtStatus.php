@@ -23,8 +23,9 @@
         $result = $stm->bind_param('ssii', $Decision,$Remark, $idnum,$artid);
 
         if($stm->execute()===true){
-            echo "Updation success";
-            echo $Decision;
+            // echo "Updation success";
+            // echo $Decision;
+            header("Location:./AfterEffects/GoBackDashboard.html");
         }
         else{
             echo "statement couldnt be updated";

@@ -33,7 +33,8 @@
 
                     if($stm->execute()===true)
                     {
-                        echo "The image and description is uploaded successfully";
+                        // echo "The image and description is uploaded successfully";
+                        header("Location:./AfterEffects/GoBackDashboard.html");
                     }
                     else{
                         echo "The statement is executed";
@@ -67,7 +68,7 @@
 
           if($stmt->execute()===true)
           {
-              echo "the banner image is deleted succesfully";
+            header("Location:./AfterEffects/GoBackDashboard.html");
           }
           else{
               echo "something is wrong";
@@ -78,12 +79,6 @@
           echo "The button is not pressed";
       }
 
-      //To allow the editing of the Banner Images
-      if(isset($_POST['Edit']))
-      {
-        
-        $sqlEd = "select ";
-      }
 
 
 
