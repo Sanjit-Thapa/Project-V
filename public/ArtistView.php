@@ -5,7 +5,7 @@ require "connection.php";
 //  global $_SESSION;
  if($_SESSION['loggedin']===true){
     $id = $_SESSION['artist_id'];
-    echo $id;
+
 
     $sqlSel = "select ArtistProfile,Username,Artistmail from artistsignup_tb where Artist_Id = ?";
 
@@ -58,7 +58,8 @@ require "connection.php";
 
                     if($stm->execute()===true)
                     {
-                        echo "Profile picture of the artist is successfully updated";
+                        // echo "Profile picture of the artist is successfully updated";
+                        header("Location:./AfterEffects/sentSuccesArtist.html");    
                     }
                     else{
                         echo "The profile picture of the artist is not updated";
@@ -98,7 +99,8 @@ require "connection.php";
                 $filedest = './Assets/ArtistProfile/' . $filename; // Set the destination path
     
                 if (move_uploaded_file($fileTempName, $filedest)) {
-                    echo "File uploaded successfully!";
+                    // echo "File uploaded successfully!";
+                    header("Location:");
     
                     // Prepare SQL insert query
                     $sqlIns = "INSERT INTO artistview_tb (ArtistId, ArtTitle, Description, ArtForm, ImgPath) VALUES (?, ?, ?, ?, ?)";
@@ -112,7 +114,9 @@ require "connection.php";
                     // Execute the statement
                     if (mysqli_stmt_execute($stm)) {
                         echo "Data insertion successful!";
-                    } else {
+                        header("Location:./AfterEffects/sentSuccesArtist.html");    
+                    } 
+                        else {
                         echo "Data insertion failed: " . mysqli_error($conn);
                     }
                 } else {
@@ -154,7 +158,8 @@ if(isset($_POST['update']))
 
     if($result===true)
     {
-        echo "Updation of the password is successful";
+        // echo "Updation of the password is successful";
+        header("Location:./AfterEffects/sentSuccesArtist.html");    
     }
     else{
         echo "sorry the password is not updated";
@@ -195,6 +200,7 @@ if(isset($_POST['update']))
                 <li><a href="#upload" class="block p-3 rounded-lg bg-indigo-700 hover:bg-indigo-600 transition text-center">Upload Artwork</a></li>
                 <li><a href="#status" class="block p-3 rounded-lg bg-indigo-700 hover:bg-indigo-600 transition text-center">Artwork Status</a></li>
                 <li><a href="#profile" class="block p-3 rounded-lg bg-indigo-700 hover:bg-indigo-600 transition text-center">Profile</a></li>
+                <li><a href="logOut.php" class="block p-3 rounded-lg bg-indigo-700 hover:bg-indigo-600 transition text-center">Log Out</a></li>
             </ul>
         </nav>
 

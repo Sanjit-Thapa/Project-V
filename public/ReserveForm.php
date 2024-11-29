@@ -1,15 +1,13 @@
 <?php
     
-    session_start();
-    ob_start();
-
     require "connection.php";
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
-  
+    session_start();
 
+    ob_start();
 
 
     // if(isset($_POST['Reserve'])){
@@ -58,7 +56,7 @@
          {
             echo "Data has been inserted successfully";
 
-            //Create an instance; passing `true` enables exceptions
+            //Create an instance; passing true enables exceptions
             require 'PHPmailer/Exception.php';
             require 'PHPmailer/PHPMailer.php';
             require 'PHPmailer/SMTP.php';
@@ -67,14 +65,14 @@
  
         try {
         //Server settings
-       $mail->SMTPDebug = SMTP::DEBUG_SERVER;                       //Enable verbose debug output
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
         $mail->Username   = 'sandipthapa383@gmail.com';                     //SMTP username
         $mail->Password   = 'hnlt ktui wkvg zobq';                               //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS
     
         //Recipients
         $mail->setFrom($email, 'User');
@@ -150,13 +148,8 @@
     
         $mail->send();
        
-       // Check for headers already sent
-if (!headers_sent()) {
-    header("Location:./AfterEffects/sent_to_Art_Gallery.html");
-} else {
-    echo "Headers already sent. Can't redirect.";
-}
-
+        // header("Location:./AfterEffects/sent_to_Art_Gallery.html");
+        header("Location:./AfterEffects/sent_to_Art_Gallery.html");
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
@@ -170,8 +163,13 @@ if (!headers_sent()) {
     else{
         echo "hi";
     }
-ob_flush();
+
+    ob_flush();
+
 ?>
+
+
+
 
 
 

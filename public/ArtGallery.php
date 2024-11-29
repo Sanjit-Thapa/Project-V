@@ -65,8 +65,7 @@
         </div>
         <ul class="hidden mx-auto md:flex space-x-4 lg:space-x-8 text-base md:text-lg font-semibold gap-4 md:gap-6">
             <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="#About">About Us</a></li>
-            <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="#">Exhibitions</a></li>
-            <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="#">Art Gallery</a></li>
+            <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="#ArtSection">Art Gallery</a></li>
             <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="ArtistLogin.php"target="_blank">Artist</a></li>
             <li class="hover:text-[#312f2a] transition ease-in-out delay-150 hover:scale-110"><a href="login.php" target="_blank">Admin</a></li>
         </ul>
@@ -153,7 +152,7 @@
 
 <!-- Now Product section -->
 
-<section class="">
+<section class="" id="ArtSection">
     <div class="pl-8 pt-10">
         <h2 class="text-[56px] leading-[1.0714285714] font-semibold tracking-[-0.005em] font-[rubik] text-[#3a061f]">
             Explore The Best

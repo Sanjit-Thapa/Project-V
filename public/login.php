@@ -3,7 +3,7 @@
 session_start();
 
 require "connection.php";
-print_r($_POST);
+
 // Getting the email and password from the login form
 
 
@@ -26,7 +26,7 @@ $Passwords = trim($_POST['password']); // Plain text password input by user
     // Check if the email exists and fetch the row
     if ($row = mysqli_fetch_assoc($result)) 
     {
-        var_dump($row);
+       
         // Debugging: Show the entered password and the hashed password from the DB
         // echo "Entered password: " . $Passwords . "<br>";
         // echo "Hashed password from DB: " . $row['Password'] . "<br>";
@@ -45,7 +45,7 @@ $Passwords = trim($_POST['password']); // Plain text password input by user
            
         } else {
             // Password does not match
-            echo "Incorrect password.";
+            header("./AfterEffects/GoBackDashboard.html");
         }
     } 
     else {
@@ -55,7 +55,7 @@ $Passwords = trim($_POST['password']); // Plain text password input by user
 } 
 else {
     // Handle case where the form was not submitted correctly
-    echo "Error: Login form was not submitted properly.";
+    // echo "Error: Login form was not submitted properly.";
 }
 ?>
 

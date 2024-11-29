@@ -105,11 +105,11 @@
     }
 }
     else{
-        echo "No file is uploaded";
+        // echo "No file is uploaded";
      }
    }
     else{
-        echo "Form is not submitted";
+        // echo "Form is not submitted";
     }
 
   
@@ -138,7 +138,7 @@
 </head>
 <body class="">
     <!-- header section -->
-    <div class="bg-blue-900 flex items-center justify-between">
+    <div class="bg-blue-900 flex items-center justify-between h-[12vh]">
         <h1 class="text-slate-300 text-[1.8vw] p-1 font-semibold pl-3">Art Gallery</h1>
         <a id="profile">
                 <img src="<?php echo $url ?>" alt="admin" class="w-16 h-14 pr-2 rounded-full text-red-200" >
@@ -169,7 +169,7 @@
               </li>
               <!-- <a href="?page=" class="hover:bg-red-600 w-full"></a> -->
               <li class="py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md text-center flex items-center justify-center space-x-2 w-full cursor-pointer">
-                <a href="https://www.facebook.com">
+                <a href="LogOut_Admin.php">
                     <button class="fa-solid fa-person-running pr-2 " ></button>
                     <span>Sign Out</span>
                 </a>

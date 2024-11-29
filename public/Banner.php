@@ -37,20 +37,20 @@
                         header("Location:./AfterEffects/GoBackDashboard.html");
                     }
                     else{
-                        echo "The statement is executed";
+                        // echo "The statement is executed";
                     }
                 }
                 else{
-                    echo "The file couldnt be moved from the temporary desination to the permanent";
+                    // echo "The file couldnt be moved from the temporary desination to the permanent";
                 }
             }
             else{
-                echo "The image is not uploaded";
+                // echo "The image is not uploaded";
             }
 
         }
     }else{
-        echo "You have not submitted the page";
+        // echo "You have not submitted the page";
 
     }
 

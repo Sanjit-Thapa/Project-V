@@ -33,18 +33,7 @@ if(isset($_POST['Signup'])){
 
 //updation of the password of the artist
 
-if(isset($_POST['update']))
-{
-    //getting the access of the new password
 
-    $newPassword = $_POST['newPassword'];
-
-    $newhashed = password_hash($newPassword,PASSWORD_DEFAULT);
-    //sql querry to update the password
-
-    $sqlUpd = "update artistsignup_tb set ArtistPassword = ? where ArtistPassword = ?";
-
-}
 
 ?>
 
